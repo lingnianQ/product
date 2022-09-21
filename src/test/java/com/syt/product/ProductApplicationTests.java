@@ -22,5 +22,6 @@ class ProductApplicationTests {
     void testConnection() throws Throwable {
         dataSource.getConnection();
         log.info("连接成功");
+
     }
 }
