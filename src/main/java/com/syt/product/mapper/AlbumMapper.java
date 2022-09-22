@@ -1,6 +1,7 @@
 package com.syt.product.mapper;
 
 import com.syt.product.pojo.entity.Album;
+import com.syt.product.pojo.vo.AlbumStrandVO;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -28,4 +29,11 @@ public interface AlbumMapper {
      * @return
      */
     int count();
+
+    /**
+     * 通过id查找
+     * @param id
+     * @return
+     */
+    AlbumStrandVO getById(Long id);
 }
