@@ -3,7 +3,7 @@ package com.syt.product.pojo.entity;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class Album implements Serializable {
@@ -12,10 +12,10 @@ public class Album implements Serializable {
     private String name;
     private String description;
     private Integer sort;
-    private LocalDate gmtCreate;
+    private LocalDateTime gmtCreate;
     /**
      * 数据最后修改时间
      */
-    private LocalDate gmtModified;
+    private LocalDateTime gmtModified;
 
 }

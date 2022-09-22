@@ -4,7 +4,7 @@ package com.syt.product.pojo.entity;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class Spu {
@@ -15,8 +15,8 @@ public class Spu {
     private String title;
     private String description;
     private BigDecimal listPrice;
-    private Long stock;
-    private Long stockThreshold;
+    private Integer stock;
+    private Integer stockThreshold;
     private String unit;
     private Long brandId;
     private String brandName;
@@ -27,19 +27,19 @@ public class Spu {
     private String pictures;
     private String keywords;
     private String tags;
-    private Long sales;
-    private Long commentCount;
-    private Long positiveCommentCount;
-    private Long sort;
-    private Long isDeleted;
-    private Long isPublished;
-    private Long isNewArrival;
-    private Long isRecommend;
-    private Long isChecked;
+    private Integer sales;
+    private Integer commentCount;
+    private Integer positiveCommentCount;
+    private Integer sort;
+    private Integer isDeleted;
+    private Integer isPublished;
+    private Integer isNewArrival;
+    private Integer isRecommend;
+    private Integer isChecked;
     private String checkUser;
-    private LocalDate gmtCheck;
-    private LocalDate gmtCreate;
-    private LocalDate gmtModified;
+    private LocalDateTime gmtCheck;
+    private LocalDateTime gmtCreate;
+    private LocalDateTime gmtModified;
 
 
 }

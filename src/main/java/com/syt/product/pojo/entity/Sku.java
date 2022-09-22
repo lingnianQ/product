@@ -4,7 +4,8 @@ package com.syt.product.pojo.entity;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 public class Sku {
 
@@ -17,13 +18,13 @@ public class Sku {
   private Long albumId;
   private String pictures;
   private BigDecimal price;
-  private Long stock;
-  private Long stockThreshold;
-  private Long sales;
-  private Long commentCount;
-  private Long positiveCommentCount;
-  private Long sort;
-  private LocalDate gmtCreate;
-  private LocalDate gmtModified;
+  private Integer stock;
+  private Integer stockThreshold;
+  private Integer sales;
+  private Integer commentCount;
+  private Integer positiveCommentCount;
+  private Integer sort;
+  private LocalDateTime gmtCreate;
+  private LocalDateTime gmtModified;
 
 }

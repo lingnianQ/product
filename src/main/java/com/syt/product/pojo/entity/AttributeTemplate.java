@@ -3,7 +3,8 @@ package com.syt.product.pojo.entity;
 
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 @Data
 public class AttributeTemplate {
@@ -13,7 +14,7 @@ public class AttributeTemplate {
     private String pinyin;
     private String keywords;
     private Integer sort;
-    private LocalDate gmtCreate;
-    private LocalDate gmtModified;
+    private LocalDateTime gmtCreate;
+    private LocalDateTime gmtModified;
 
 }
