@@ -1,5 +1,7 @@
 package com.syt.product;
 
+import com.syt.product.mapper.AlbumMapper;
+import com.syt.product.pojo.entity.Album;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ class ProductApplicationTests {
     void contextLoads() {
     }
 
+
+
     @Autowired
     private DataSource dataSource;
 
@@ -22,6 +26,6 @@ class ProductApplicationTests {
     void testConnection() throws Throwable {
         dataSource.getConnection();
         log.info("连接成功");
-
     }
+
 }
