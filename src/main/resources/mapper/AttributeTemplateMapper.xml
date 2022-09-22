@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.syt.product.mapper.AttributeTemplateMapper">
     <!--插入数据pms_attribute_template-->
+<!--    <insert>标签上配置useGeneratedKeys="true"和keyProperty="属性名"这2个属性，就可获取插入的新数据的自动编号的主键值！-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO pms_attribute_template(name, pinyin, keywords, sort)
         VALUES (#{name}, #{pinyin}, #{keywords}, #{sort})

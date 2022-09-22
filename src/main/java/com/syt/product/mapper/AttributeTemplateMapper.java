@@ -4,10 +4,13 @@ import com.syt.product.pojo.entity.AttributeTemplate;
 
 /**
  * 处理品牌的mapper
+ *
  * @author sytsn
  */
 public interface AttributeTemplateMapper {
     /**
+     * 插入数据
+     *
      * @param attributeTemplate
      * @return
      */
@@ -23,6 +26,7 @@ public interface AttributeTemplateMapper {
 
     /**
      * 统计数量
+     *
      * @return
      */
     int count();
