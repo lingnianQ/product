@@ -3,6 +3,9 @@ package com.syt.product;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author sytsn
+ */
 @SpringBootApplication
 public class ProductApplication {
 

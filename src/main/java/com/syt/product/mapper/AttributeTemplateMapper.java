@@ -4,6 +4,7 @@ import com.syt.product.pojo.entity.AttributeTemplate;
 
 /**
  * 处理品牌的mapper
+ * @author sytsn
  */
 public interface AttributeTemplateMapper {
     /**

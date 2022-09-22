@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * 处理相册的Mapper接口
+ * @author sytsn
  */
 @Repository
 public interface AlbumMapper {

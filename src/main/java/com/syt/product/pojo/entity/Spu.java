@@ -3,11 +3,15 @@ package com.syt.product.pojo.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * @author sytsn
+ */
 @Data
-public class Spu {
+public class Spu implements Serializable {
 
     private Long id;
     private String name;

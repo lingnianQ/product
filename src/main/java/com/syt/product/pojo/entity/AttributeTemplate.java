@@ -6,6 +6,9 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 
+/**
+ * @author sytsn
+ */
 @Data
 public class AttributeTemplate {
 

@@ -5,6 +5,9 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * @author sytsn
+ */
 @Data
 public class Album implements Serializable {
 
