@@ -1,6 +1,9 @@
 package com.syt.product.mapper;
 
+import com.syt.product.pojo.vo.BrandListItemVO;
 import com.syt.product.pojo.vo.BrandStandardVO;
+
+import java.util.List;
 
 /**
  * @author sytsnb@gmail.com
@@ -10,8 +13,15 @@ import com.syt.product.pojo.vo.BrandStandardVO;
 public interface BrandMapper {
     /**
      * 通过id获取 BrandStandardVO
+     *
      * @param id long
      * @return
      */
     BrandStandardVO getStandardById(Long id);
+
+    /**
+     * list
+     * @return
+     */
+    List<BrandListItemVO> list();
 }

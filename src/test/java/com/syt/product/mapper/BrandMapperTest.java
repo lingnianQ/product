@@ -20,4 +20,9 @@ class BrandMapperTest {
         BrandStandardVO brandStandardVO = brandMapper.getStandardById(1L);
         System.out.println("brandStandardVO = " + brandStandardVO);
     }
+
+    @Test
+    void list() {
+        brandMapper.list().forEach(System.out::println);
+    }
 }

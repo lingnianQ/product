@@ -3,6 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.syt.product.mapper.BrandMapper">
+    <!--    查询列表-->
+    <select id="list" resultType="BrandListItemVO">
+        select
+        <include refid="StandardQueryFields"/>
+        from pms_brand
+        order by id desc
+    </select>
+
     <select id="getStandardById" resultMap="StandardResultMap">
         select
         <include refid="StandardQueryFields"/>

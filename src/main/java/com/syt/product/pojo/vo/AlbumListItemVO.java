@@ -5,6 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
+ * list
  * @author sytsn
  */
 @Data
