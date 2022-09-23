@@ -4,6 +4,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.syt.product.mapper.AlbumMapper">
 
+    <!--插入数据 pms_album-->
+    <insert id="insert">
+        INSERT INTO pms_album(name, description, sort)
+        VALUES (#{name}, #{description}, #{sort})
+    </insert>
+
+    <!--批量插入数据 pms_album-->
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pms_album(name, description, sort)
+        VALUES
+        <foreach collection="list" index="index" item="album" separator=",">
+            (#{album.name}, #{album.description}, #{album.sort})
+        </foreach>
+    </insert>
+    <!--根据id删除-->
+    <delete id="deleteById">
+        DELETE
+        FROM pms_album
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByIds">
+        DELETE FROM pms_album WHERE id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--查询总数count-->
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_album
+    </select>
+
     <select id="getStandardById" resultType="AlbumStandardVO">
         select id,
                name,
@@ -12,6 +45,7 @@
         from pms_album
         where id = #{id}
     </select>
+
     <!--    查询列表-->
     <select id="list" resultType="AlbumListItemVO">
         select id,
@@ -22,21 +56,5 @@
         order by id desc
     </select>
 
-    <!--插入数据 pms_album-->
-    <insert id="insert">
-        INSERT INTO pms_album(name, description, sort)
-        VALUES (#{name}, #{description}, #{sort})
-    </insert>
-    <!--根据id删除-->
-    <delete id="deleteById">
-        DELETE
-        FROM pms_album
-        WHERE id = #{id}
-    </delete>
-    <!--查询总数count-->
-    <select id="count" resultType="int">
-        SELECT COUNT(*)
-        FROM pms_album
-    </select>
 
 </mapper>

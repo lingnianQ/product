@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 class AttributeTemplateMapperTest {
 
@@ -23,6 +26,21 @@ class AttributeTemplateMapperTest {
         int rows = attributeTemplateMapper.insert(attributeTemplate);
         System.out.println("=====插入完成" + rows);
         System.out.println(attributeTemplate);
+    }
+
+    @Test
+    void testInsertBatch() {
+        List<AttributeTemplate> attributeTemplateList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            AttributeTemplate attributeTemplate = new AttributeTemplate();
+            attributeTemplate.setName("testName" + i);
+            attributeTemplate.setPinyin("test--pinyin" + i);
+            attributeTemplate.setKeywords("test--keywords" + i);
+            attributeTemplate.setSort(50 + i);
+            attributeTemplateList.add(attributeTemplate);
+        }
+        int rows = attributeTemplateMapper.insertBatch(attributeTemplateList);
+        System.out.println("rows = " + rows);
     }
 
     @Test
@@ -46,5 +64,12 @@ class AttributeTemplateMapperTest {
     @Test
     void list() {
         attributeTemplateMapper.list().forEach(System.out::println);
+    }
+
+    @Test
+    void testDeleteByIds() {
+        Long[] ids = {3L, 4L};
+        int rows = attributeTemplateMapper.deleteByIds(ids);
+        System.out.println("rows = " + rows);
     }
 }

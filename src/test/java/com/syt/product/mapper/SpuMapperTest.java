@@ -16,7 +16,7 @@ class SpuMapperTest {
     @Test
     void testInsert() {
         Spu spu = new Spu();
-        spu.setId(1L);
+        spu.setId(2L);
         int i = spuMapper.insert(spu);
         System.out.println("spu = " + spu);
     }

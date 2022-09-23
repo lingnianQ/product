@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 @Slf4j
 class AlbumMapperTest {
@@ -18,6 +21,7 @@ class AlbumMapperTest {
         AlbumStandardVO albumStandardVO = albumMapper.getStandardById(1L);
         System.out.println(albumStandardVO);
     }
+
     @Test
     void testInsert() {
         Album album = new Album();
@@ -25,8 +29,23 @@ class AlbumMapperTest {
         album.setDescription("--test---");
         album.setSort(22);
         int rows = albumMapper.insert(album);
-        log.info("insert完成,受影响的行数: {}",rows);
+        log.info("insert完成,受影响的行数: {}", rows);
     }
+
+    @Test
+    void testInsertBatch() {
+        List<Album> albumList = new ArrayList<Album>();
+        for (int i = 0; i < 10; i++) {
+            Album album = new Album();
+            album.setName("test" + i);
+            album.setDescription("--test---" + i);
+            album.setSort(22 + i);
+            albumList.add(album);
+        }
+        int rows = albumMapper.insertBatch(albumList);
+        System.out.println("rows = " + rows);
+    }
+
     @Test
     void testDeleteById() {
         albumMapper.deleteById(1L);
@@ -34,7 +53,7 @@ class AlbumMapperTest {
     }
 
     @Test
-    void testCount(){
+    void testCount() {
         int count = albumMapper.count();
         System.out.println("count = " + count);
     }
@@ -42,5 +61,12 @@ class AlbumMapperTest {
     @Test
     void testList() {
         albumMapper.list().forEach(System.out::println);
+    }
+
+    @Test
+    void testDeleteByIds() {
+        Long[] ids = {3L, 4L, 5L, 6L};
+        int rows = albumMapper.deleteByIds(ids);
+        System.out.println("rows = " + rows);
     }
 }

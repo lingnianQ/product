@@ -4,6 +4,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.syt.product.mapper.AttributeTemplateMapper">
 
+
+    <!--插入数据pms_attribute_template-->
+    <!--    <insert>标签上配置useGeneratedKeys="true"和keyProperty="属性名"这2个属性，就可获取插入的新数据的自动编号的主键值！-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pms_attribute_template(name, pinyin, keywords, sort)
+        VALUES (#{name}, #{pinyin}, #{keywords}, #{sort})
+    </insert>
+
+    <!--   批量插入模板数据 -->
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pms_attribute_template(name,pinyin,keywords,sort)
+        VALUES
+        <foreach collection="list" item="attributeTemplate" separator=",">
+            (#{attributeTemplate.name},#{attributeTemplate.pinyin},#{attributeTemplate.keywords},#{attributeTemplate.sort})
+        </foreach>
+    </insert>
+
+    <delete id="deleteById">
+        DELETE
+        FROM pms_attribute_template
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByIds">
+        DELETE FROM pms_attribute_template WHERE id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--查询总数count-->
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_attribute_template
+    </select>
+
     <select id="getStandardById" resultType="AttributeTemplateStandardVO">
         select id,
                name,
@@ -22,26 +58,6 @@
                sort
         from pms_attribute_template
         order by id desc
-    </select>
-
-
-    <!--插入数据pms_attribute_template-->
-    <!--    <insert>标签上配置useGeneratedKeys="true"和keyProperty="属性名"这2个属性，就可获取插入的新数据的自动编号的主键值！-->
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO pms_attribute_template(name, pinyin, keywords, sort)
-        VALUES (#{name}, #{pinyin}, #{keywords}, #{sort})
-    </insert>
-
-    <delete id="deleteById">
-        DELETE
-        FROM pms_attribute_template
-        WHERE id = #{id}
-    </delete>
-
-    <!--查询总数count-->
-    <select id="count" resultType="int">
-        SELECT COUNT(*)
-        FROM pms_attribute_template
     </select>
 
 </mapper>

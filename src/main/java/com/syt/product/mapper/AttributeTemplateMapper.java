@@ -14,12 +14,20 @@ import java.util.List;
  */
 public interface AttributeTemplateMapper {
     /**
-     * 插入数据
+     * 插入属性模板数据
      *
-     * @param attributeTemplate
-     * @return
+     * @param attributeTemplate 属性模板
+     * @return 受影响的行数
      */
     int insert(AttributeTemplate attributeTemplate);
+
+    /**
+     * 批量删除属性模板数据
+     *
+     * @param attributeTemplateList 属性模板集合
+     * @return 受影响的行数
+     */
+    int insertBatch(List<AttributeTemplate> attributeTemplateList);
 
     /**
      * 根据id删除
@@ -28,6 +36,14 @@ public interface AttributeTemplateMapper {
      * @return
      */
     int deleteById(Long id);
+
+    /**
+     * 通过id批量删除
+     *
+     * @param ids id
+     * @return 受影响的行数
+     */
+    int deleteByIds(Long[] ids);
 
     /**
      * 统计数量
