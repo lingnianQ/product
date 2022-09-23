@@ -6,13 +6,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 品牌
+ * 类别
  *
  * @author sytsnb@gmail.com
  * @version 0.0.1
  */
 @Data
-public class Brand implements Serializable {
+public class Category implements Serializable {
 
     /**
      * 记录id
@@ -20,24 +20,19 @@ public class Brand implements Serializable {
     private Long id;
 
     /**
-     * 品牌名称
+     * 类别名称
      */
     private String name;
 
     /**
-     * 品牌名称的拼音
+     * 父级类别id，如果无父级，则为0
      */
-    private String pinyin;
+    private Long parentId;
 
     /**
-     * 品牌logo的URL
+     * 深度，最顶级类别的深度为1，次级为2，以此类推
      */
-    private String logo;
-
-    /**
-     * 品牌简介
-     */
-    private String description;
+    private Integer depth;
 
     /**
      * 关键词列表，各关键词使用英文的逗号分隔
@@ -50,29 +45,24 @@ public class Brand implements Serializable {
     private Integer sort;
 
     /**
-     * 销量（冗余）
+     * 图标图片的URL
      */
-    private Integer sales;
-
-    /**
-     * 商品种类数量总和（冗余）
-     */
-    private Integer productCount;
-
-    /**
-     * 买家评论数量总和（冗余）
-     */
-    private Integer commentCount;
-
-    /**
-     * 买家好评数量总和（冗余）
-     */
-    private Integer positiveCommentCount;
+    private String icon;
 
     /**
      * 是否启用，1=启用，0=未启用
      */
     private Integer enable;
+
+    /**
+     * 是否为父级（是否包含子级），1=是父级，0=不是父级
+     */
+    private Integer isParent;
+
+    /**
+     * 是否显示在导航栏中，1=启用，0=未启用
+     */
+    private Integer isDisplay;
 
     /**
      * 数据创建时间

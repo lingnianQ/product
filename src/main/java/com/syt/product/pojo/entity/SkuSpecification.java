@@ -6,33 +6,43 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 属性模板
+ * SKU数据
  *
  * @author sytsnb@gmail.com
  * @version 0.0.1
  */
 @Data
-public class AttributeTemplate implements Serializable {
+public class SkuSpecification implements Serializable {
 
     /**
      * 记录id
      */
-    private Long id;
+    private Integer id;
 
     /**
-     * 属性模板名称
+     * SKU id
      */
-    private String name;
+    private Long skuId;
 
     /**
-     * 属性模板名称的拼音
+     * 属性id
      */
-    private String pinyin;
+    private Long attributeId;
 
     /**
-     * 关键词列表，各关键词使用英文的逗号分隔
+     * 属性名称
      */
-    private String keywords;
+    private String attributeName;
+
+    /**
+     * 属性值
+     */
+    private String attributeValue;
+
+    /**
+     * 自动补充的计量单位
+     */
+    private String unit;
 
     /**
      * 自定义排序序号

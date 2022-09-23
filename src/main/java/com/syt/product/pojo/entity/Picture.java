@@ -6,13 +6,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 属性模板
+ * 图片
  *
  * @author sytsnb@gmail.com
  * @version 0.0.1
  */
 @Data
-public class AttributeTemplate implements Serializable {
+public class Picture implements Serializable {
 
     /**
      * 记录id
@@ -20,19 +20,34 @@ public class AttributeTemplate implements Serializable {
     private Long id;
 
     /**
-     * 属性模板名称
+     * 相册id
      */
-    private String name;
+    private Long albumId;
 
     /**
-     * 属性模板名称的拼音
+     * 图片url
      */
-    private String pinyin;
+    private String url;
 
     /**
-     * 关键词列表，各关键词使用英文的逗号分隔
+     * 是否为封面图片，1=是，0=否
      */
-    private String keywords;
+    private Integer isCover;
+
+    /**
+     * 图片简介
+     */
+    private String description;
+
+    /**
+     * 图片宽度，单位：px
+     */
+    private Integer width;
+
+    /**
+     * 图片高度，单位：px
+     */
+    private Integer height;
 
     /**
      * 自定义排序序号

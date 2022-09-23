@@ -6,13 +6,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 属性模板
+ * 品牌类别关联
  *
  * @author sytsnb@gmail.com
  * @version 0.0.1
  */
 @Data
-public class AttributeTemplate implements Serializable {
+public class BrandCategory implements Serializable {
 
     /**
      * 记录id
@@ -20,24 +20,14 @@ public class AttributeTemplate implements Serializable {
     private Long id;
 
     /**
-     * 属性模板名称
+     * 品牌id
      */
-    private String name;
+    private Long brandId;
 
     /**
-     * 属性模板名称的拼音
+     * 类别id
      */
-    private String pinyin;
-
-    /**
-     * 关键词列表，各关键词使用英文的逗号分隔
-     */
-    private String keywords;
-
-    /**
-     * 自定义排序序号
-     */
-    private Integer sort;
+    private Long categoryId;
 
     /**
      * 数据创建时间
