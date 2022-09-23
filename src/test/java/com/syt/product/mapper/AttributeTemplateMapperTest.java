@@ -1,6 +1,7 @@
 package com.syt.product.mapper;
 
 import com.syt.product.pojo.entity.AttributeTemplate;
+import com.syt.product.pojo.vo.AttributeTemplateStandardVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,5 +35,16 @@ class AttributeTemplateMapperTest {
     void testCount() {
         int count = attributeTemplateMapper.count();
         System.out.println("count = " + count);
+    }
+
+    @Test
+    void getStandardById() {
+        AttributeTemplateStandardVO attributeTemplateStandardVO = attributeTemplateMapper.getStandardById(2L);
+        System.out.println("attributeTemplateStandardVO = " + attributeTemplateStandardVO);
+    }
+
+    @Test
+    void list() {
+        attributeTemplateMapper.list().forEach(System.out::println);
     }
 }

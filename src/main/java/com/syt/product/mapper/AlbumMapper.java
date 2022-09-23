@@ -47,6 +47,7 @@ public interface AlbumMapper {
 
     /**
      * 查询列表
+     *
      * @return java.util.List
      */
     List<AlbumListItemVO> list();

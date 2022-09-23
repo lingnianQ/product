@@ -16,7 +16,7 @@ class SkuMapperTest {
     @Test
     void testInsert() {
         Sku sku = new Sku();
-        sku.setId(2L);
+        sku.setId(3L);
         skuMapper.insert(sku);
         System.out.println("sku = " + sku);
     }
