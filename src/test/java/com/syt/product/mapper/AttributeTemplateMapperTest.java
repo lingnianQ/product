@@ -50,6 +50,19 @@ class AttributeTemplateMapperTest {
     }
 
     @Test
+    void testUpdateById() {
+        AttributeTemplate attributeTemplate = new AttributeTemplate();
+        attributeTemplate.setId(5L);
+        attributeTemplate.setName("testUpdateById");
+        attributeTemplate.setPinyin("test--pinyin");
+        attributeTemplate.setKeywords("testUpdateById--keywords");
+        attributeTemplate.setSort(99);
+        int rows = attributeTemplateMapper.updateById(attributeTemplate);
+        System.out.println("rows = " + rows);
+        System.out.println("attributeTemplate = " + attributeTemplate);
+    }
+
+    @Test
     void testCount() {
         int count = attributeTemplateMapper.count();
         System.out.println("count = " + count);

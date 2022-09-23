@@ -31,6 +31,23 @@
             #{id}
         </foreach>
     </delete>
+    <!--  动态sql , 跟新相册数据-->
+    <update id="updateById">
+        update pms_album
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="description != null">
+                description=#{description},
+            </if>
+            <if test="sort != null">
+                sort=#{sort}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
     <!--查询总数count-->
     <select id="count" resultType="int">
         SELECT COUNT(*)

@@ -1,5 +1,6 @@
 package com.syt.product.mapper;
 
+import com.syt.product.pojo.entity.Album;
 import com.syt.product.pojo.entity.AttributeTemplate;
 import com.syt.product.pojo.vo.AttributeTemplateListItemVO;
 import com.syt.product.pojo.vo.AttributeTemplateStandardVO;
@@ -44,6 +45,14 @@ public interface AttributeTemplateMapper {
      * @return 受影响的行数
      */
     int deleteByIds(Long[] ids);
+
+    /**
+     * 根据id修改相册
+     *
+     * @param attributeTemplate
+     * @return
+     */
+    int updateById(AttributeTemplate attributeTemplate);
 
     /**
      * 统计数量

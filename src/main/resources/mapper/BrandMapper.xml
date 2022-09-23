@@ -10,19 +10,22 @@
         from pms_brand
         order by id desc
     </select>
-
+    <!--      引入<sql></sql>  <include refid="StandardQueryFields"/>-->
     <select id="getStandardById" resultMap="StandardResultMap">
         select
         <include refid="StandardQueryFields"/>
         from pms_brand
         WHERE id = #{id}
     </select>
+
+    <!--    可复用sql-->
     <sql id="StandardQueryFields">
         id,name,pinyin,logo, description,
         keywords,sort,sales,product_count,
         comment_count,positive_comment_count,enable
     </sql>
 
+    <!--别名-->
     <resultMap id="StandardResultMap" type="com.syt.product.pojo.vo.BrandStandardVO">
         <result column="product_count" property="productCount"/>
         <result column="comment_count" property="commentCount"/>

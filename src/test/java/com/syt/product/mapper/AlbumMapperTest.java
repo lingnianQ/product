@@ -53,6 +53,17 @@ class AlbumMapperTest {
     }
 
     @Test
+    void testUpdateById() {
+        Album album = new Album();
+        album.setId(2L);
+        album.setName("testUpdate");
+        album.setDescription("--testUpdate---");
+        album.setSort(66);
+        int rows = albumMapper.updateById(album);
+        System.out.println("rows = " + rows);
+    }
+
+    @Test
     void testCount() {
         int count = albumMapper.count();
         System.out.println("count = " + count);

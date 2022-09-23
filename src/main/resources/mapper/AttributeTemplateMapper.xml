@@ -33,7 +33,25 @@
             #{id}
         </foreach>
     </delete>
-
+    <!--动态sql 更新数据-->
+    <update id="updateById">
+        UPDATE pms_attribute_template
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="pinyin != null">
+                pinyin=#{pinyin},
+            </if>
+            <if test="keywords != null">
+                keywords=#{keywords},
+            </if>
+            <if test="sort != null">
+                sort=#{sort},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
     <!--查询总数count-->
     <select id="count" resultType="int">
         SELECT COUNT(*)

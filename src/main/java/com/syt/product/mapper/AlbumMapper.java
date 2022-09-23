@@ -47,6 +47,13 @@ public interface AlbumMapper {
     int deleteByIds(Long[] ids);
 
     /**
+     * 根据id修改相册
+     * @param album
+     * @return
+     */
+    int updateById(Album album);
+
+    /**
      * 统计数量
      *
      * @return
