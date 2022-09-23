@@ -17,12 +17,6 @@ class AlbumMapperTest {
     private AlbumMapper albumMapper;
 
     @Test
-    void testGetStandardById() {
-        AlbumStandardVO albumStandardVO = albumMapper.getStandardById(1L);
-        System.out.println(albumStandardVO);
-    }
-
-    @Test
     void testInsert() {
         Album album = new Album();
         album.setName("test");
@@ -70,14 +64,20 @@ class AlbumMapperTest {
     }
 
     @Test
-    void testList() {
-        albumMapper.list().forEach(System.out::println);
-    }
-
-    @Test
     void testDeleteByIds() {
         Long[] ids = {3L, 4L, 5L, 6L};
         int rows = albumMapper.deleteByIds(ids);
         System.out.println("rows = " + rows);
+    }
+
+    @Test
+    void testGetStandardById() {
+        AlbumStandardVO albumStandardVO = albumMapper.getStandardById(9L);
+        System.out.println(albumStandardVO);
+    }
+
+    @Test
+    void testList() {
+        albumMapper.list().forEach(System.out::println);
     }
 }

@@ -19,6 +19,7 @@
     </select>
 
     <!--    可复用sql-->
+    <!--idea 检测问题 id-->
     <sql id="StandardQueryFields">
         id,name,pinyin,logo, description,
         keywords,sort,sales,product_count,
