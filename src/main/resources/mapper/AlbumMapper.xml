@@ -3,6 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.syt.product.mapper.AlbumMapper">
+
+    <select id="getStandardById" resultType="AlbumStandardVO">
+        select id,
+               name,
+               description,
+               sort
+        from pms_album
+        where id = #{id}
+    </select>
+    <!--    查询列表-->
+    <select id="list" resultType="AlbumListItemVO">
+        select id,
+               name,
+               description,
+               sort
+        from pms_album
+        order by id desc
+    </select>
+
     <!--插入数据 pms_album-->
     <insert id="insert">
         INSERT INTO pms_album(name, description, sort)
@@ -19,4 +38,5 @@
         SELECT COUNT(*)
         FROM pms_album
     </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.syt.product.mapper;
 
 import com.syt.product.pojo.entity.Album;
+import com.syt.product.pojo.vo.AlbumStandardVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,16 @@ class AlbumMapperTest {
     private AlbumMapper albumMapper;
 
     @Test
+    void testGetStandardById() {
+        AlbumStandardVO albumStandardVO = albumMapper.getStandardById(1L);
+        System.out.println(albumStandardVO);
+    }
+    @Test
     void testInsert() {
         Album album = new Album();
         album.setName("test");
         album.setDescription("--test---");
-        album.setSort(99);
+        album.setSort(22);
         int rows = albumMapper.insert(album);
         log.info("insert完成,受影响的行数: {}",rows);
     }
@@ -31,5 +37,10 @@ class AlbumMapperTest {
     void testCount(){
         int count = albumMapper.count();
         System.out.println("count = " + count);
+    }
+
+    @Test
+    void testList() {
+        albumMapper.list().forEach(System.out::println);
     }
 }
