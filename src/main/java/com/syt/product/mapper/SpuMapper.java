@@ -1,8 +1,11 @@
 package com.syt.product.mapper;
 
-import com.syt.product.pojo.entity.Sku;
+
 import com.syt.product.pojo.entity.Spu;
 
+/**
+ * @author sytsn
+ */
 public interface SpuMapper {
 
     /**

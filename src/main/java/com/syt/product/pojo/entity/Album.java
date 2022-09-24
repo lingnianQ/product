@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 相册
+ * 相册 相册(pms_album) > 属性模板(pms_attribute_template) > 品牌(pms_brand) > 属性(pms_attribute) > 类别(pms_category) > 其它
  *
  * @author sytsnb@gmail.com
  * @version 0.0.1

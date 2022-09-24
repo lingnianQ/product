@@ -3,6 +3,98 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.syt.product.mapper.BrandMapper">
+    <!--插入-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_brand(
+        <include refid="insertQueryFields"/>
+        )
+        VALUES(
+        <include refid="insertQueryFieldsValues"/>
+        )
+    </insert>
+
+    <!--批量插入-->
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pms_brand(
+        <include refid="insertQueryFields"/>
+        )
+        VALUES
+        <foreach collection="list" item="brand" separator=",">
+            <include refid="insertBatchQueryFieldsValues"/>
+        </foreach>
+    </insert>
+
+    <!--根据id删除数据-->
+    <delete id="deleteById">
+        DELETE
+        FROM pms_brand
+        WHERE id = #{id}
+    </delete>
+
+    <!--    根据ids数组批量删除-->
+    <delete id="deleteByIds">
+        DELETE
+        FROM pms_brand
+        WHERE id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--  int updateById() -->
+    <update id="updateById">
+        update pms_brand
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="pinyin != null">
+                pinyin = #{pinyin},
+            </if>
+            <if test="logo != null">
+                logo = #{logo},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="sales != null">
+                sales = #{sales},
+            </if>
+            <if test="productCount != null">
+                product_count = #{productCount},
+            </if>
+            <if test="commentCount != null">
+                comment_count=#{commentCount},
+            </if>
+            <if test="positiveCommentCount != null">
+                positive_comment_count=#{positiveCommentCount},
+            </if>
+            <if test="enable != null">
+                enable=#{enable}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!-- 查询行数-->
+    <select id="count" resultType="int">
+        select count(*)
+        from pms_brand
+    </select>
+
+    <!-- 根据品牌名查询行数-->
+    <select id="countByName" resultType="int">
+        select count(*)
+        from pms_brand
+        where name = #{name}
+    </select>
+
     <!--    查询列表-->
     <select id="list" resultType="BrandListItemVO">
         select
@@ -10,6 +102,7 @@
         from pms_brand
         order by id desc
     </select>
+
     <!--      引入<sql></sql>  <include refid="StandardQueryFields"/>-->
     <select id="getStandardById" resultMap="StandardResultMap">
         select
@@ -24,6 +117,45 @@
         id,name,pinyin,logo, description,
         keywords,sort,sales,product_count,
         comment_count,positive_comment_count,enable
+    </sql>
+
+    <!--插入查询字段-->
+    <sql id="insertQueryFields">
+        name,pinyin,logo, description,
+        keywords,sort,sales,product_count,
+        comment_count,positive_comment_count,enable
+    </sql>
+
+    <!--插入查询字段值-->
+    <sql id="insertQueryFieldsValues">
+        #{name},
+        #{pinyin},
+        #{logo},
+        #{description},
+        #{keywords},
+        #{sort},
+        #{sales},
+        #{productCount},
+        #{commentCount},
+        #{positiveCommentCount},
+        #{enable}
+    </sql>
+
+    <!--    批量插入字段值-->
+    <sql id="insertBatchQueryFieldsValues">
+        <if test="true">
+            (#{brand.name},
+            #{brand.pinyin},
+            #{brand.logo},
+            #{brand.description},
+            #{brand.keywords},
+            #{brand.sort},
+            #{brand.sales},
+            #{brand.productCount},
+            #{brand.commentCount},
+            #{brand.positiveCommentCount},
+            #{brand.enable})
+        </if>
     </sql>
 
     <!--别名-->
