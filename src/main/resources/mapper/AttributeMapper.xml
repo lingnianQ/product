@@ -109,7 +109,7 @@
         WHERE id = #{id}
     </select>
 
-    <!--    AttributeListItemVO list();-->
+    <!--    List<AttributeListItemVO> list();-->
     <select id="list" resultType="AttributeListItemVO">
         SELECT id,
                template_id,
