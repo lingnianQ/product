@@ -1,6 +1,7 @@
 package com.syt.product.mapper;
 
 import com.syt.product.pojo.entity.Sku;
+import com.syt.product.util.IdUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,14 +17,14 @@ class SkuMapperTest {
     @Test
     void testInsert() {
         Sku sku = new Sku();
-        sku.setId(4L);
+        sku.setId(IdUtils.getId());
         skuMapper.insert(sku);
         System.out.println("sku = " + sku);
     }
 
     @Test
     void testDeleteById() {
-        int i = skuMapper.deleteById(1L);
+        int i = skuMapper.deleteById(IdUtils.getId());
         System.out.println("i = " + i);
     }
 

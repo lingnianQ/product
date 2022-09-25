@@ -1,6 +1,7 @@
 package com.syt.product.mapper;
 
 import com.syt.product.pojo.entity.Spu;
+import com.syt.product.util.IdUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,14 +17,14 @@ class SpuMapperTest {
     @Test
     void testInsert() {
         Spu spu = new Spu();
-        spu.setId(2L);
+        spu.setId(IdUtils.getId());
         int i = spuMapper.insert(spu);
         System.out.println("spu = " + spu);
     }
 
     @Test
     void testDeleteById() {
-        int i = spuMapper.deleteById(1L);
+        int i = spuMapper.deleteById(IdUtils.getId());
         System.out.println("i = " + i);
     }
 
