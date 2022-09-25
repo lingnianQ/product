@@ -63,6 +63,14 @@ public interface AlbumMapper {
     int count();
 
     /**
+     * 根据相册名称统计当前表中相册数据的数量
+     *
+     * @param name 相册名称
+     * @return 当前表中匹配名称的相册数据的数量
+     */
+    int countByName(String name);
+
+    /**
      * 通过id查找
      *
      * @param id 相册id

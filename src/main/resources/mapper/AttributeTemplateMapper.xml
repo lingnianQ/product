@@ -58,6 +58,15 @@
         FROM pms_attribute_template
     </select>
 
+    <!-- 根据属性模板名称统计当前表中属性模板数据的数量-->
+    <!--    int countByName(String name);-->
+    <select id="countByName" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_attribute_template
+        WHERE name = #{name}
+    </select>
+
+<!--    根据id获取属性模板的标准信息-->
     <select id="getStandardById" resultType="AttributeTemplateStandardVO">
         select id,
                name,
@@ -67,6 +76,7 @@
         from pms_attribute_template
         where id = #{id}
     </select>
+
     <!--    查询列表-->
     <select id="list" resultType="AttributeTemplateListItemVO">
         select id,

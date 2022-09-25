@@ -2,6 +2,7 @@ package com.syt.product.mapper;
 
 import com.syt.product.pojo.entity.AttributeTemplate;
 import com.syt.product.pojo.vo.AttributeTemplateStandardVO;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @SpringBootTest
 class AttributeTemplateMapperTest {
 
@@ -66,6 +68,13 @@ class AttributeTemplateMapperTest {
     void testCount() {
         int count = attributeTemplateMapper.count();
         System.out.println("count = " + count);
+    }
+
+    @Test
+    void testCountByName() {
+        int countByName = attributeTemplateMapper.countByName("testName");
+        log.debug("通过姓名查找的行数: {}", countByName);
+        System.out.println("countByName = " + countByName);
     }
 
     @Test

@@ -53,7 +53,21 @@
         SELECT COUNT(*)
         FROM pms_album
     </select>
+    <!--    /**-->
+    <!--    * 根据相册名称统计当前表中相册数据的数量-->
+    <!--    *-->
+    <!--    * @param name 相册名称-->
+    <!--    * @return 当前表中匹配名称的相册数据的数量-->
+    <!--    */-->
+    <!--    int countByName(String name);-->
+    <select id="countByName" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_album
+        WHERE name = #{name}
+    </select>
 
+
+    <!--    返回相册标准信息-->
     <select id="getStandardById" resultType="AlbumStandardVO">
         select
         <include refid="StandardQueryFields"/>

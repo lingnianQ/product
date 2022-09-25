@@ -62,6 +62,11 @@ class AlbumMapperTest {
         int count = albumMapper.count();
         System.out.println("count = " + count);
     }
+    @Test
+    void testCountByName() {
+        int countByName = albumMapper.countByName("test");
+        System.out.println("countByName = " + countByName);
+    }
 
     @Test
     void testDeleteByIds() {

@@ -55,12 +55,19 @@ public interface AttributeTemplateMapper {
     int updateById(AttributeTemplate attributeTemplate);
 
     /**
-     * 统计数量
+     * 统计当前表中属性模板数据的数量
      *
-     * @return
+     * @return 当前表中属性模板数据的数量
      */
     int count();
 
+    /**
+     * 根据属性模板名称统计当前表中属性模板数据的数量
+     *
+     * @param name 属性模板名称
+     * @return 当前表中匹配名称的属性模板数据的数量
+     */
+    int countByName(String name);
 
     /**
      * 通过id查找
@@ -71,9 +78,9 @@ public interface AttributeTemplateMapper {
     AttributeTemplateStandardVO getStandardById(Long id);
 
     /**
-     * 查询列表
+     * 查询属性模板列表
      *
-     * @return java.util.List
+     * @return java.util.List,属性模板列表的集合
      */
     List<AttributeTemplateListItemVO> list();
 }
