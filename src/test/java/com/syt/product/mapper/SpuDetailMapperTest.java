@@ -34,7 +34,7 @@ class SpuDetailMapperTest {
 
     @Test
     void testDeleteByIds() {
-        int rows = spuDetailMapper.deleteByIds(2L, 3L, 4L,5L);
+        int rows = spuDetailMapper.deleteByIds(6L, 7L, 4L, 5L);
         System.out.println("rows = " + rows);
     }
 }
