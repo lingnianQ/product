@@ -1,4 +1,4 @@
-package com.syt.product;
+package com.syt.product.other;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
