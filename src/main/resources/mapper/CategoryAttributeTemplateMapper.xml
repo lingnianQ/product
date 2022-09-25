@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syt.product.mapper.CategoryAttributeTemplateMapper">
+
+    <!--    * 插入类别与属性模板关联数据-->
+    <!--    int insert(CategoryAttributeTemplate categoryAttributeTemplate);-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pms_category_attribute_template(category_id, attribute_template_id)
+        VALUES (#{categoryId}, #{attributeTemplateId})
+    </insert>
+
+    <!--    * 根据id删除类别与属性模板关联-->
+    <!--    int deleteById(Long id);-->
+    <delete id="deleteById">
+        DELETE
+        FROM pms_category_attribute_template
+        WHERE id = #{id}
+    </delete>
+
+    <!--    * 根据多个id批量删除类别与属性模板关联数据-->
+    <!--    int deleteByIds(Long... ids);-->
+    <delete id="deleteByIds">
+        DELETE
+        FROM pms_category_attribute_template
+        WHERE id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--    * 根据类别统计关联数据的数量-->
+    <!--    int countByCategory(Long categoryId);-->
+    <select id="countByCategory" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_category_attribute_template
+        WHERE category_id = #{categoryId}
+    </select>
+
+    <!--    * 根据属性模板统计关联数据的数量-->
+    <!--    int countByAttributeTemplate(Long attributeTemplateId);-->
+    <select id="countByAttributeTemplate" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_category_attribute_template
+        WHERE attribute_template_id = #{attributeTemplateId}
+    </select>
+
+</mapper>
