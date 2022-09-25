@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2022 2022/9/25 2:18
  */
 @Data
-public class CateGoryListItemVO {
+public class CategoryListItemVO {
     /**
      * 记录id
      */

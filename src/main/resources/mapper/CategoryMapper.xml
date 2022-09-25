@@ -41,7 +41,7 @@
     <delete id="deleteByIds">
         DELETE FROM pms_category
         WHERE id in
-        <foreach collection="array" item="id" open="(" separator="," close=")">
+        <foreach collection="list" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
@@ -93,25 +93,15 @@
         from pms_category
         where name = #{name}
     </select>
-
-    <!--    CateGoryStandardVO getStandardByName(String name);-->
-    <select id="getStandardByName" resultType="CateGoryStandardVO">
-        select id,
-               name,
-               parent_id,
-               depth,
-               keywords,
-               sort,
-               icon,
-               enable,
-               is_parent,
-               is_display
+    <!--       int countByParentId(Long parentId);-->
+    <select id="countByParentId" resultType="int">
+        select count(*)
         from pms_category
-        where name = #{name}
+        where parent_id = #{parentId}
     </select>
 
-    <!--    List<CateGoryListItemVO> list();-->
-    <select id="list" resultType="CateGoryListItemVO">
+    <!--        CategoryStandardVO getStandardById(Long id);-->
+    <select id="getStandardById" resultType="CategoryStandardVO">
         select id,
                name,
                parent_id,
@@ -123,6 +113,23 @@
                is_parent,
                is_display
         from pms_category
+        where id = #{id}
+    </select>
+
+    <!-- List<CategoryListItemVO> listByParentId(Long parentId);-->
+    <select id="listByParentId" resultType="CategoryListItemVO">
+        select id,
+               name,
+               parent_id,
+               depth,
+               keywords,
+               sort,
+               icon,
+               enable,
+               is_parent,
+               is_display
+        from pms_category
+        where parent_id=#{parentId}
         order by id desc
     </select>
 

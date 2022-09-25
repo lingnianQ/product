@@ -1,16 +1,14 @@
 package com.syt.product.mapper;
 
 import com.syt.product.pojo.entity.Category;
-import com.syt.product.pojo.vo.CateGoryListItemVO;
-import com.syt.product.pojo.vo.CateGoryStandardVO;
+import com.syt.product.pojo.vo.CategoryListItemVO;
+import com.syt.product.pojo.vo.CategoryStandardVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * 类别测试
@@ -55,7 +53,10 @@ class CategoryMapperTest {
 
     @Test
     void DeleteByIds() {
-        Long[] ids = {80L, 81L, 82L, 83L};
+        List<Long> ids = new ArrayList<>();
+        ids.add(1L);
+        ids.add(2L);
+        ids.add(3L);
         int rows = categoryMapper.deleteByIds(ids);
         System.out.println("rows = " + rows);
     }
@@ -84,14 +85,22 @@ class CategoryMapperTest {
     }
 
     @Test
-    void GetStandardByName() {
-        CateGoryStandardVO cateGoryStandardVO = categoryMapper.getStandardByName("test");
-        System.out.println("cateGoryStandardVO = " + cateGoryStandardVO);
+    void testCountByParentId() {
+        int rows = categoryMapper.countByParentId(21L);
+        System.out.println("rows = " + rows);
     }
 
     @Test
-    void List() {
-        List<CateGoryListItemVO> cateGoryListItemVOList = categoryMapper.list();
-        cateGoryListItemVOList.forEach(System.out::println);
+    void testGetStandardById() {
+        CategoryStandardVO categoryStandardVO = categoryMapper.getStandardById(18L);
+        System.out.println("categoryStandardVO = " + categoryStandardVO);
     }
+
+    @Test
+    void testListByParentId() {
+        List<CategoryListItemVO> categoryListItemVOList = categoryMapper.listByParentId(44L);
+        categoryListItemVOList.forEach(System.out::println);
+    }
+
+
 }
