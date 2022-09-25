@@ -3,7 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.syt.product.mapper.SpuMapper">
-    <!--spu插入-->
+    <!--  * 插入SPU数据-->
+    <!--    int insert(Spu spu);-->
     <insert id="insert">
         INSERT INTO pms_spu (id, name, type_number,
                              title, description, list_price,
@@ -13,7 +14,7 @@
                              keywords, tags, sales,
                              comment_count, positive_comment_count, sort,
                              is_deleted, is_published, is_new_arrival,
-                             is_recommend, is_checked, check_user)
+                             is_recommend, is_checked, check_user, gmt_check)
         VALUES (#{id}, #{name}, #{typeNumber},
                 #{title}, #{description}, #{listPrice},
                 #{stock}, #{stockThreshold}, #{unit},
@@ -22,18 +23,86 @@
                 #{keywords}, #{tags}, #{sales},
                 #{commentCount}, #{positiveCommentCount}, #{sort},
                 #{isDeleted}, #{isPublished}, #{isNewArrival},
-                #{isRecommend}, #{isChecked}, #{checkUser})
+                #{isRecommend}, #{isChecked}, #{checkUser}, #{gmtCheck})
     </insert>
-    <!--spu根据删除-->
+
+    <!--    * 根据id删除SPU-->
+    <!--    int deleteById(Long id);-->
     <delete id="deleteById">
         DELETE
         FROM pms_spu
         where id = #{id}
     </delete>
 
-    <select id="count" resultType="int">
+    <!--    * 根据多个id批量删除SPU数据-->
+    <!--    int deleteByIds(Long... ids);-->
+    <delete id="deleteByIds">
+        DELETE
+        FROM pms_spu
+        WHERE id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--    * 根据品牌统计SPU数量-->
+    <!--    int countByBrand(Long brandId);-->
+    <select id="countByBrand" resultType="int">
         SELECT COUNT(*)
         FROM pms_spu
+        WHERE brand_id = #{brandId}
     </select>
+    <!--    * 根据类别统计SPU数量-->
+    <!--    int countByCategory(Long categoryId);-->
+    <select id="countByCategory" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_spu
+        WHERE category_id = #{categoryId}
+    </select>
+
+    <!--    * 根据相册统计SPU数量-->
+    <!--    int countByAlbum(Long albumId);-->
+    <select id="countByAlbum" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_spu
+        WHERE album_id = #{albumId}
+    </select>
+
+<!--        * 根据id获取SPU的标准信息-->
+<!--        SpuStandardVO getStandardById(Long id);-->
+        <select id="getStandardById" resultType="SpuStandardVO">
+            SELECT
+            <include refid="StandardQueryFields"/>
+            FROM pms_spu
+            WHERE id=#{id}
+        </select>
+
+    <sql id="StandardQueryFields">
+        <if test="ture">
+            id, name, type_number,
+            title, description, list_price,
+            stock, stock_threshold, unit,
+            brand_id, brand_name, category_id, category_name,
+            attribute_template_id, album_id, pictures,
+            keywords, tags, sales,
+            comment_count, positive_comment_count, sort,
+            is_deleted, is_published, is_new_arrival,
+            is_recommend, is_checked, check_user,gmt_check
+        </if>
+    </sql>
+
+    <sql id="StandardQueryFieldsValues">
+        <if test="ture">
+            #{id}, #{name}, #{typeNumber},
+            #{title}, #{description}, #{listPrice},
+            #{stock}, #{stockThreshold}, #{unit},
+            #{brandId}, #{brandName}, #{categoryId}, #{categoryName},
+            #{attributeTemplateId}, #{albumId}, #{pictures},
+            #{keywords}, #{tags}, #{sales},
+            #{commentCount}, #{positiveCommentCount}, #{sort},
+            #{isDeleted}, #{isPublished}, #{isNewArrival},
+            #{isRecommend}, #{isChecked}, #{checkUser},#{gmtCheck}
+        </if>
+    </sql>
 
 </mapper>

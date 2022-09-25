@@ -2,6 +2,8 @@ package com.syt.product.pojo.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 用于查询list
  *
@@ -9,7 +11,7 @@ import lombok.Data;
  * @date 2022 2022/9/25 0:47
  */
 @Data
-public class AttributeListItemVO {
+public class AttributeListItemVO implements Serializable {
     /**
      * 记录id
      */

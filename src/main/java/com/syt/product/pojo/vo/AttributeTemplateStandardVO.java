@@ -3,6 +3,7 @@ package com.syt.product.pojo.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
  * @author sytsn
  */
 @Data
-public class AttributeTemplateStandardVO {
+public class AttributeTemplateStandardVO implements Serializable {
 
     /**
      * 记录id

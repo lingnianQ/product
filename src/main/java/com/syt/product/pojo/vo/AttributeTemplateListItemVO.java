@@ -3,12 +3,14 @@ package com.syt.product.pojo.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * @author sytsn
  */
 @Data
-public class AttributeTemplateListItemVO {
+public class AttributeTemplateListItemVO implements Serializable {
 
     /**
      * 记录id

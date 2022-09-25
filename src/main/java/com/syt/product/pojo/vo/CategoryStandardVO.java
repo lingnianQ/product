@@ -2,13 +2,15 @@ package com.syt.product.pojo.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 类别 标准VO
  * @author sytsnb@gmail.com
  * @date 2022 2022/9/25 2:19
  */
 @Data
-public class CategoryStandardVO {
+public class CategoryStandardVO implements Serializable {
     /**
      * 记录id
      */
