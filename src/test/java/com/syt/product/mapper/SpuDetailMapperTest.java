@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author sytsnb@gmail.com
@@ -34,7 +33,7 @@ class SpuDetailMapperTest {
 
     @Test
     void testDeleteByIds() {
-        int rows = spuDetailMapper.deleteByIds(6L, 7L, 4L, 5L);
+        int rows = spuDetailMapper.deleteByIds(9L, 8L, 4L, 5L);
         System.out.println("rows = " + rows);
     }
 }

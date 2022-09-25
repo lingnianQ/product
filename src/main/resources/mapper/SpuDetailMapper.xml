@@ -23,12 +23,15 @@
     <!--    * 根据多个id批量删除SPU详情数据-->
     <!--    int deleteByIds(Long... ids);-->
     <!--    <where></where>自动去除前面的or或则and-->
+    <!--    <where>-->
+    <!--        <foreach collection="array" item="id">-->
+    <!--            or id=#{id}-->
+    <!--        </foreach>-->
+    <!--    </where>-->
     <delete id="deleteByIds">
-        DELETE FROM pms_spu_detail
-        <where>
-            <foreach collection="array" item="id">
-                or id=#{id}
-            </foreach>
-        </where>
+        DELETE FROM pms_spu_detail where
+        <foreach collection="array" item="id" separator="or">
+            id=#{id}
+        </foreach>
     </delete>
 </mapper>
