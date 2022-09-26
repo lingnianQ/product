@@ -1,0 +1,15 @@
+# 激活Profile配置
+spring:
+  profiles:
+    active: ${active:pro}
+
+# 配置Mybatis的XML文件的位置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.syt.product.pojo.entity,com.syt.product.pojo.vo
+logging:
+  file:
+    name: log/my.log
