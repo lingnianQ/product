@@ -14,6 +14,21 @@
                 #{stock}, #{stockThreshold}, #{sales},
                 #{commentCount}, #{positiveCommentCount}, #{sort})
     </insert>
+    <!--    批量插入sku-->
+    <insert id="insertBatch">
+        INSERT INTO pms_sku(id, spu_id, title, bar_code, attribute_template_id, specifications, album_id, pictures,
+        price,
+        stock, stock_threshold, sales, comment_count, positive_comment_count, sort)
+        VALUES
+        <foreach collection="list" item="sku" separator=",">
+            (#{sku.id}, #{sku.spuId}, #{sku.title},
+            #{sku.barCode}, #{sku.attributeTemplateId}, #{sku.specifications},
+            #{sku.albumId}, #{sku.pictures}, #{sku.price},
+            #{sku.stock}, #{sku.stockThreshold}, #{sku.sales},
+            #{sku.commentCount}, #{sku.positiveCommentCount}, #{sku.sort})
+        </foreach>
+    </insert>
+
     <!--根据id删除sku内容-->
     <delete id="deleteById">
         DELETE
@@ -21,9 +36,127 @@
         where id = #{id}
     </delete>
 
+    <!--批量删除sku-->
+    <delete id="deleteByIds">
+        DELETE
+        FROM pms_sku
+        where id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--    根据id更新-->
+    <update id="updateById">
+        UPDATE pms_sku
+        <set>
+            <if test="spuId != null">
+                spu_id=#{spuId},
+            </if>
+            <if test="title != null">
+                title=#{title},
+            </if>
+            <if test="barCode != null">
+                bar_code=#{barCode},
+            </if>
+            <if test="attributeTemplateId != null">
+                attribute_template_id=#{attributeTemplateId},
+            </if>
+            <if test="specifications != null">
+                specifications=#{specifications},
+            </if>
+            <if test="albumId != null">
+                album_id=#{albumId},
+            </if>
+            <if test="pictures != null">
+                pictures=#{pictures},
+            </if>
+            <if test="price != null">
+                price=#{price},
+            </if>
+            <if test="stock != null">
+                stock=#{stock},
+            </if>
+            <if test="stockThreshold != null">
+                stock_threshold=#{stockThreshold},
+            </if>
+            <if test="sales != null">
+                sales=#{sales},
+            </if>
+            <if test="commentCount != null">
+                comment_count=#{commentCount},
+            </if>
+            <if test="positiveCommentCount != null">
+                positive_comment_count=#{positiveCommentCount},
+            </if>
+            <if test="sales != null">
+                sort=#{sort},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <!--    统计数量-->
     <select id="count" resultType="int">
         SELECT COUNT(*)
         FROM pms_sku
     </select>
 
+    <!--    * 根据id查询SKU标准信息-->
+    <!--    SkuStandardVO getStandardById(Long id);-->
+    <select id="getStandardById" resultType="SkuStandardVO">
+        SELECT id,
+               spu_id,
+               title,
+               bar_code,
+               attribute_template_id,
+               specifications,
+               album_id,
+               pictures,
+               price,
+               stock,
+               stock_threshold,
+               sales,
+               comment_count,
+               positive_comment_count,
+               sort
+        FROM pms_sku
+        WHERE id = #{id}
+    </select>
+
+    <!--    * 查询SKU列表-->
+    <!--    List<SkuListItemVO> list();-->
+    <select id="list" resultMap="listItemResultMap">
+        SELECT
+        <include refid="listItemFields"/>
+        FROM pms_sku
+    </select>
+
+    <sql id="listItemFields">
+        <if test="true">
+            id,
+            spu_id,
+            title,
+            bar_code,
+            attribute_template_id,
+            specifications,
+            album_id,
+            pictures,
+            price,
+            stock,
+            stock_threshold,
+            sales,
+            comment_count,
+            positive_comment_count,
+            sort
+        </if>
+    </sql>
+
+    <resultMap id="listItemResultMap" type="SkuListItemVO">
+        <result column="spu_id" property="spuId"/>
+        <result column="bar_code" property="barCode"/>
+        <result column="attribute_template_id" property="attributeTemplateId"/>
+        <result column="album_id" property="albumId"/>
+        <result column="stock_threshold" property="stockThreshold"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="positive_comment_count" property="positiveCommentCount"/>
+    </resultMap>
 </mapper>
