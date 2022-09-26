@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syt.product.mapper.SkuSpecificationMapper">
+
+    <!--    * 插入SKU数据数据-->
+    <!--    int insert(SkuSpecification skuSpecification);-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pms_sku_specification(sku_id, attribute_id, attribute_name, attribute_value, unit, sort)
+        VALUES (#{skuId}, #{attributeId}, #{attributeName}, #{attributeValue}, #{unit}, #{sort})
+    </insert>
+
+    <!--    * 批量插入SKU数据数据-->
+    <!--    int insertBatch(List<SkuSpecification> skuSpecificationList);-->
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pms_sku_specification(sku_id, attribute_id, attribute_name, attribute_value, unit, sort)
+        VALUES
+        <foreach collection="list" item="skuSpecification" separator=",">
+            (#{skuSpecification.skuId}, #{skuSpecification.attributeId}, #{skuSpecification.attributeName},
+            #{skuSpecification.attributeValue}, #{skuSpecification.unit}, #{skuSpecification.sort})
+        </foreach>
+    </insert>
+
+    <!--    * 根据id删除SKU数据数据-->
+    <!--    int deleteById(Long id);-->
+    <delete id="deleteById">
+        DELETE
+        FROM pms_sku_specification
+        WHERE id = #{id}
+    </delete>
+
+    <!--    * 批量删除SKU数据-->
+    <!--    int deleteByIds(Long[] ids);-->
+    <delete id="deleteByIds">
+        DELETE
+        FROM pms_sku_specification
+        WHERE id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--    * 更新SKU数据数据-->
+    <!--    int updateById(SkuSpecification skuSpecification);-->
+    <update id="updateById">
+        UPDATE pms_sku_specification
+        <set>
+            <if test="skuId != null">
+                sku_id=#{skuId},
+            </if>
+            <if test="attributeId != null">
+                attribute_id=#{attributeId},
+            </if>
+            <if test="attributeName != null">
+                attribute_name=#{attributeName},
+            </if>
+            <if test="attributeValue != null">
+                attribute_value=#{attributeValue},
+            </if>
+            <if test="unit != null">
+                unit=#{unit},
+            </if>
+            <if test="sort != null">
+                sort=#{sort}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--    * 统计SKU数据数据的数量-->
+    <!--    int count();-->
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM pms_sku_specification
+        ORDER BY id
+    </select>
+
+    <!--    * 根据id查询SKU数据标准信息-->
+    <!--    SkuSpecificationStandardVO getStandardById(Long id);-->
+    <select id="getStandardById" resultType="SkuSpecificationStandardVO">
+        SELECT id, sku_id, attribute_id, attribute_name, attribute_value, unit, sort
+        FROM pms_sku_specification
+        WHERE id = #{id}
+    </select>
+
+    <!--    * 查询SKU数据列表-->
+    <!--    List<SkuSpecificationListItemVO> list();-->
+    <select id="list" resultType="SkuSpecificationListItemVO">
+        SELECT id, sku_id, attribute_id, attribute_name, attribute_value, unit, sort
+        FROM pms_sku_specification
+        order by id
+    </select>
+</mapper>

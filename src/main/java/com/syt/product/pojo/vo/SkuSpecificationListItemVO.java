@@ -1,19 +1,15 @@
-package com.syt.product.pojo.entity;
+package com.syt.product.pojo.vo;
 
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
- * SKU数据
- *
  * @author sytsnb@gmail.com
- * @version 0.0.1
+ * @date 2022 2022/9/26 9:59
  */
 @Data
-public class SkuSpecification implements Serializable {
-
+public class SkuSpecificationListItemVO implements Serializable {
     /**
      * 记录id
      */
@@ -48,15 +44,4 @@ public class SkuSpecification implements Serializable {
      * 自定义排序序号
      */
     private Integer sort;
-
-    /**
-     * 数据创建时间
-     */
-    private LocalDateTime gmtCreate;
-
-    /**
-     * 数据最后修改时间
-     */
-    private LocalDateTime gmtModified;
-
 }

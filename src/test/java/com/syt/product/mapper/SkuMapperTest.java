@@ -5,6 +5,7 @@ import com.syt.product.util.IdUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,6 +16,7 @@ class SkuMapperTest {
     private SkuMapper skuMapper;
 
     @Test
+    @Transactional
     void testInsert() {
         Sku sku = new Sku();
         sku.setId(IdUtils.getId());
