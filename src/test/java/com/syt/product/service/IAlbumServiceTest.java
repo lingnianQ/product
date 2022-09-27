@@ -4,6 +4,7 @@ import com.syt.product.pojo.dto.AlbumAddNewDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @date 2022 2022/9/26 16:27
  */
 @SpringBootTest
+@Transactional
 class IAlbumServiceTest {
 
     @Autowired
@@ -20,9 +22,15 @@ class IAlbumServiceTest {
     @Test
     void testAddNew() {
         AlbumAddNewDTO albumAddNewDTO = new AlbumAddNewDTO();
-        albumAddNewDTO.setName("test02");
+        albumAddNewDTO.setName("test0224");
         albumAddNewDTO.setDescription("描述-简介");
         albumAddNewDTO.setSort(2);
         albumService.addNew(albumAddNewDTO);
+    }
+
+    @Test
+    void testDeleteById() {
+        Long id = 2L;
+        albumService.deleteById(id);
     }
 }

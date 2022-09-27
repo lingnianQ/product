@@ -4,10 +4,7 @@ import com.syt.product.pojo.dto.AlbumAddNewDTO;
 import com.syt.product.service.IAlbumService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 相册控制层
@@ -49,5 +46,12 @@ public class AlbumController {
 //        } catch (ServiceException e) {
 //            return e.getMessage();
 //        }
+    }
+
+    @GetMapping("/delById/{id}")
+    public String deleteById(@PathVariable Long id) {
+        log.debug("开始处理deleteById: {}", id);
+        albumService.deleteById(id);
+        return "ok";
     }
 }
