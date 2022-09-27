@@ -50,7 +50,7 @@ public class AlbumController {
 
     @GetMapping("/delById/{id}")
     public String deleteById(@PathVariable Long id) {
-        log.debug("开始处理deleteById: {}", id);
+        log.debug("开始处理相册deleteById: {}", id);
         albumService.deleteById(id);
         return "ok";
     }

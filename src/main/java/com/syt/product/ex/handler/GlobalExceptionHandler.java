@@ -2,6 +2,7 @@ package com.syt.product.ex.handler;
 
 import com.syt.product.ex.ServiceException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -17,6 +18,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    public GlobalExceptionHandler() {
+        System.out.println("GlobalExceptionHandler.GlobalExceptionHandler");
+    }
+
     /**
      * ServiceException-
      * 同一个异常只可以写一个---不可以冲突
@@ -31,6 +37,17 @@ public class GlobalExceptionHandler {
         return e.getMessage();
     }
 
+    /**
+     * get post 异常
+     *
+     * @param e e
+     * @return e.getMessage()
+     */
+    @ExceptionHandler
+    public String handlerHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        log.debug("HttpRequestMethodNotSupportedException: {}", e.getMessage());
+        return e.getMessage();
+    }
 
     @ExceptionHandler
     public String handleThrowable(Throwable e) {
