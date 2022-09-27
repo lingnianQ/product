@@ -1,5 +1,6 @@
 package com.syt.product.service.impl;
 
+import com.syt.product.ex.ServiceException;
 import com.syt.product.mapper.AlbumMapper;
 import com.syt.product.pojo.dto.AlbumAddNewDTO;
 import com.syt.product.pojo.entity.Album;
@@ -28,7 +29,7 @@ public class AlbumServiceImpl implements IAlbumService {
     public void addNew(AlbumAddNewDTO albumAddNewDTO) {
         int countByName = albumMapper.countByName(albumAddNewDTO.getName());
         if (countByName != 0) {
-            throw new RuntimeException();
+            throw new ServiceException("添加相册失败,尝试添加的相册名称已存在");
         }
         Album album = new Album();
         //复制albumAddNewDTO 到album
