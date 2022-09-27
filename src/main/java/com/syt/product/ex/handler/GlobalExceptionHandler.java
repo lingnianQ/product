@@ -31,22 +31,11 @@ public class GlobalExceptionHandler {
         return e.getMessage();
     }
 
-    @ExceptionHandler
-    public String handlerNullPointerException(NullPointerException e) {
-        log.info("NullPointerException {}", e.getMessage());
-        return e.getMessage();
-    }
-
-    @ExceptionHandler
-    public String handleRuntimeException(RuntimeException e) {
-        log.debug("捕获到RuntimeException：{}", e.getMessage());
-        return e.getMessage();
-    }
 
     @ExceptionHandler
     public String handleThrowable(Throwable e) {
         log.debug("捕获到Throwable：{}", e.getMessage());
-        e.printStackTrace(); // 强烈建议
+        e.printStackTrace(); // 强烈建议--dev
         return e.getMessage();
     }
 
