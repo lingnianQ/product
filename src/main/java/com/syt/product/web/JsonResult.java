@@ -1,6 +1,7 @@
 package com.syt.product.web;
 
 import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.syt.product.ex.ServiceException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * 状态信息
  *
  * @author sytsnb@gmail.com
+ * *@JsonInclude(JsonInclude.Include.ALWAYS)
  * @date 2022 2022/9/28 11:38
  */
 @Data

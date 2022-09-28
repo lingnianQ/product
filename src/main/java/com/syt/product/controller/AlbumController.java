@@ -49,7 +49,7 @@ public class AlbumController {
 //        }
     }
 
-    @GetMapping("/delById/{id}")
+    @GetMapping("/delById/{id:[0-9]+}")
     public JsonResult<Void> deleteById(@PathVariable Long id) {
         log.debug("开始处理相册deleteById: {}", id);
         albumService.deleteById(id);
