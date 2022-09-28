@@ -5,6 +5,7 @@ import com.syt.product.mapper.AttributeTemplateMapper;
 import com.syt.product.pojo.dto.AttributeTemplateAddNewDTO;
 import com.syt.product.pojo.entity.AttributeTemplate;
 import com.syt.product.service.IAttributeTemplateService;
+import com.syt.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ public class AttributeTemplateServiceImpl implements IAttributeTemplateService {
     @Override
     public void addNew(AttributeTemplateAddNewDTO attributeTemplateAddNewDTO) {
         if (attributeTemplateMapper.countByName(attributeTemplateAddNewDTO.getName()) != 0) {
-            throw new ServiceException("属性模板名已存在,请更换属性模板名");
+            String message = "属性模板名已存在,请更换属性模板名";
+            throw new ServiceException(ServiceCode.ERR_CONFLICT, message);
         }
         AttributeTemplate attributeTemplate = new AttributeTemplate();
         BeanUtils.copyProperties(attributeTemplateAddNewDTO, attributeTemplate);
@@ -39,7 +41,7 @@ public class AttributeTemplateServiceImpl implements IAttributeTemplateService {
         if (attributeTemplateMapper.getStandardById(id) == null) {
             String message = "属性模板名不存在,删除失败";
             log.debug(message);
-            throw new ServiceException(message);
+            throw new ServiceException(ServiceCode.ERR_DELETE, message);
         }
         log.debug("开始删除属性模板");
         attributeTemplateMapper.deleteById(id);

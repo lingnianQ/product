@@ -3,6 +3,7 @@ package com.syt.product.controller;
 
 import com.syt.product.pojo.dto.BrandAddNewDTO;
 import com.syt.product.service.IBrandService;
+import com.syt.product.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,16 +30,16 @@ public class BrandController {
     }
 
     @GetMapping("/add-new")
-    public String addNew(BrandAddNewDTO brandAddNewDTO) {
+    public JsonResult<Void> addNew(BrandAddNewDTO brandAddNewDTO) {
         log.debug("开始处理品牌的添加: {}", brandAddNewDTO);
         brandService.addNew(brandAddNewDTO);
-        return "ok";
+        return JsonResult.ok();
     }
 
     @GetMapping("/delById/{id}")
-    public String deleteById(@PathVariable Long id) {
+    public JsonResult<Void> deleteById(@PathVariable Long id) {
         log.debug("开始处理品牌deleteById: {}", id);
         brandService.deleteById(id);
-        return "ok";
+        return JsonResult.ok();
     }
 }

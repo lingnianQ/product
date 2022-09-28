@@ -4,6 +4,7 @@ import com.syt.product.pojo.dto.BrandAddNewDTO;
 import com.syt.product.pojo.dto.CategoryAddNewDTO;
 import com.syt.product.service.IBrandService;
 import com.syt.product.service.ICategoryService;
+import com.syt.product.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,16 +31,16 @@ public class CategoryController {
     }
 
     @GetMapping("/add-new")
-    public String addNew(CategoryAddNewDTO categoryAddNewDTO) {
+    public JsonResult<Void> addNew(CategoryAddNewDTO categoryAddNewDTO) {
         log.debug("开始处理类别的添加: {}", categoryAddNewDTO);
         categoryService.addNew(categoryAddNewDTO);
-        return "ok";
+        return JsonResult.ok();
     }
 
     @GetMapping("/delById/{id}")
-    public String deleteById(@PathVariable Long id) {
+    public JsonResult<Void> deleteById(@PathVariable Long id) {
         log.debug("开始处理类别deleteById: {}", id);
         categoryService.deleteById(id);
-        return "ok";
+        return JsonResult.ok();
     }
 }

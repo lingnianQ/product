@@ -1,6 +1,7 @@
 package com.syt.product.ex.handler;
 
 import com.syt.product.ex.ServiceException;
+import com.syt.product.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -32,9 +33,9 @@ public class GlobalExceptionHandler {
      * @return e.getMessage()
      */
     @ExceptionHandler
-    public String handlerServiceException(ServiceException e) {
+    public JsonResult<Void> handlerServiceException(ServiceException e) {
         log.info("handlerServiceException {}", e.getMessage());
-        return e.getMessage();
+        return JsonResult.fail(e);
     }
 
     /**
@@ -50,10 +51,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
-    public String handleThrowable(Throwable e) {
-        log.debug("捕获到Throwable：{}", e.getMessage());
-        e.printStackTrace(); // 强烈建议--dev
-        return e.getMessage();
+    public JsonResult<Void> handleThrowable(Throwable e) {
+        log.debug("处理Throwable");
+        e.printStackTrace();//dev-强烈建议
+
+        Integer serviceCode = 99999;
+        String message = "程序运行过程中出现未知错误，请联系系统管理员！";
+        return JsonResult.fail(serviceCode, message);
     }
+
 
 }

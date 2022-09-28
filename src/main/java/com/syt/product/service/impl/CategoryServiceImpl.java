@@ -7,6 +7,7 @@ import com.syt.product.pojo.dto.CategoryAddNewDTO;
 import com.syt.product.pojo.entity.Brand;
 import com.syt.product.pojo.entity.Category;
 import com.syt.product.service.ICategoryService;
+import com.syt.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class CategoryServiceImpl implements ICategoryService {
         if (countByName != 0) {
             String message = "类别已存在";
             log.debug(message);
-            throw new ServiceException(message);
+            throw new ServiceException(ServiceCode.ERR_CONFLICT, message);
         }
         Category category = new Category();
         BeanUtils.copyProperties(categoryAddNewDTO, category);
@@ -44,7 +45,7 @@ public class CategoryServiceImpl implements ICategoryService {
         if (categoryMapper.getStandardById(id) == null) {
             String message = "类别id不存在";
             log.debug(message);
-            throw new ServiceException(message);
+            throw new ServiceException(ServiceCode.ERR_DELETE, message);
         }
         categoryMapper.deleteById(id);
         log.debug("删除类别成功");

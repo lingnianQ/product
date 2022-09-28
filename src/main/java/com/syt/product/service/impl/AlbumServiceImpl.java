@@ -6,6 +6,7 @@ import com.syt.product.pojo.dto.AlbumAddNewDTO;
 import com.syt.product.pojo.entity.Album;
 import com.syt.product.pojo.vo.AlbumStandardVO;
 import com.syt.product.service.IAlbumService;
+import com.syt.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,10 @@ public class AlbumServiceImpl implements IAlbumService {
     @Override
     public void addNew(AlbumAddNewDTO albumAddNewDTO) {
         int countByName = albumMapper.countByName(albumAddNewDTO.getName());
+
         if (countByName != 0) {
-            throw new ServiceException("添加相册失败,尝试添加的相册名称已存在");
+            String message = "添加相册失败,尝试添加的相册名称已存在";
+            throw new ServiceException(ServiceCode.ERR_CONFLICT, message);
         }
         Album album = new Album();
         //复制albumAddNewDTO 到album
@@ -49,7 +52,7 @@ public class AlbumServiceImpl implements IAlbumService {
         if (standardVO == null) {
             String message = "删除失败,相册id不存在";
             log.warn(message);
-            throw new ServiceException(message);
+            throw new ServiceException(ServiceCode.ERR_DELETE, message);
         }
         log.debug("开始删除相册数据: {}", id);
         albumMapper.deleteById(id);

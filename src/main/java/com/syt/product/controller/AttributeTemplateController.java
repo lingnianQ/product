@@ -2,6 +2,7 @@ package com.syt.product.controller;
 
 import com.syt.product.pojo.dto.AttributeTemplateAddNewDTO;
 import com.syt.product.service.IAttributeTemplateService;
+import com.syt.product.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,16 +27,16 @@ public class AttributeTemplateController {
     }
 
     @GetMapping("/add-new")
-    public String addNew(AttributeTemplateAddNewDTO attributeTemplateAddNewDTO) {
+    public JsonResult<Void> addNew(AttributeTemplateAddNewDTO attributeTemplateAddNewDTO) {
         log.debug("开始处理属性模板的添加: {}", attributeTemplateAddNewDTO);
         attributeTemplateService.addNew(attributeTemplateAddNewDTO);
-        return "ok";
+        return JsonResult.ok();
     }
 
     @GetMapping("/delById/{id}")
-    public String deleteById(@PathVariable Long id) {
+    public JsonResult<Void> deleteById(@PathVariable Long id) {
         log.debug("开始处理属性模板deleteById: {}", id);
         attributeTemplateService.deleteById(id);
-        return "ok";
+        return JsonResult.ok();
     }
 }

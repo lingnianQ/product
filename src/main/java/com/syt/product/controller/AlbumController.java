@@ -2,6 +2,7 @@ package com.syt.product.controller;
 
 import com.syt.product.pojo.dto.AlbumAddNewDTO;
 import com.syt.product.service.IAlbumService;
+import com.syt.product.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,21 +38,21 @@ public class AlbumController {
      * <p>
      * //@RequestMapping(value = {"/add-new", "/addNew", "/add_new"}, method = {RequestMethod.GET, RequestMethod.POST})
      */
-    @GetMapping(value = {"/add-new", "/addNew", "/add_new"})
-    public String addNew(AlbumAddNewDTO albumAddNewDTO) {
+    @PostMapping(value = {"/add-new", "/addNew", "/add_new"})
+    public JsonResult<Void> addNew(AlbumAddNewDTO albumAddNewDTO) {
 //        try {
         log.debug("开始处理添加相册的请求: {}", albumAddNewDTO);
         albumService.addNew(albumAddNewDTO);
-        return "ok";
+        return JsonResult.ok();
 //        } catch (ServiceException e) {
 //            return e.getMessage();
 //        }
     }
 
     @GetMapping("/delById/{id}")
-    public String deleteById(@PathVariable Long id) {
+    public JsonResult<Void> deleteById(@PathVariable Long id) {
         log.debug("开始处理相册deleteById: {}", id);
         albumService.deleteById(id);
-        return "ok";
+        return JsonResult.ok();
     }
 }

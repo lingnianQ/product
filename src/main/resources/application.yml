@@ -2,6 +2,9 @@
 spring:
   profiles:
     active: ${active:pro}
+  # Jackson框架相关配置
+  jackson:
+    default-property-inclusion: non_null
 
 # 配置Mybatis的XML文件的位置
 mybatis:

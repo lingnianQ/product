@@ -5,6 +5,7 @@ import com.syt.product.mapper.BrandMapper;
 import com.syt.product.pojo.dto.BrandAddNewDTO;
 import com.syt.product.pojo.entity.Brand;
 import com.syt.product.service.IBrandService;
+import com.syt.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class BrandServiceImpl implements IBrandService {
         if (countByName != 0) {
             String message = "品牌名已存在";
             log.debug(message);
-            throw new ServiceException(message);
+            throw new ServiceException(ServiceCode.ERR_CONFLICT, message);
         }
         Brand brand = new Brand();
         BeanUtils.copyProperties(brandAddNewDTO, brand);
@@ -44,7 +45,7 @@ public class BrandServiceImpl implements IBrandService {
         if (brandMapper.getStandardById(id) == null) {
             String message = "品牌id不存在";
             log.debug(message);
-            throw new ServiceException(message);
+            throw new ServiceException(ServiceCode.ERR_DELETE, message);
         }
         brandMapper.deleteById(id);
         log.debug("删除品牌成功");
