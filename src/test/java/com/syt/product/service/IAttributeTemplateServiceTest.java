@@ -35,7 +35,7 @@ class IAttributeTemplateServiceTest {
 
     @Test
     void testDeleteById() {
-        Long id = 80L;
+        Long id = 84L;
         attributeTemplateService.deleteById(id);
     }
 }
