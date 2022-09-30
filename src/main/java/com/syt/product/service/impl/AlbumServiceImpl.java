@@ -4,6 +4,7 @@ import com.syt.product.ex.ServiceException;
 import com.syt.product.mapper.AlbumMapper;
 import com.syt.product.pojo.dto.AlbumAddNewDTO;
 import com.syt.product.pojo.entity.Album;
+import com.syt.product.pojo.vo.AlbumListItemVO;
 import com.syt.product.pojo.vo.AlbumStandardVO;
 import com.syt.product.service.IAlbumService;
 import com.syt.product.web.ServiceCode;
@@ -11,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 相册业务逻辑实现
@@ -57,5 +60,10 @@ public class AlbumServiceImpl implements IAlbumService {
         log.debug("开始删除相册数据: {}", id);
         albumMapper.deleteById(id);
         log.debug("删除相册成功");
+    }
+
+    @Override
+    public List<AlbumListItemVO> list() {
+        return albumMapper.list();
     }
 }

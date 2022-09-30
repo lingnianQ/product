@@ -1,11 +1,17 @@
 package com.syt.product.controller;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.syt.product.pojo.dto.AlbumAddNewDTO;
+import com.syt.product.pojo.vo.AlbumListItemVO;
 import com.syt.product.service.IAlbumService;
 import com.syt.product.web.JsonResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 相册控制层
@@ -13,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @author sytsnb@gmail.com
  * @date 2022 2022/9/26 17:14
  */
+@Api(tags = "01. 相册管理")
 @Slf4j
 @RestController
 @RequestMapping("/albums")
@@ -38,6 +45,8 @@ public class AlbumController {
      * <p>
      * //@RequestMapping(value = {"/add-new", "/addNew", "/add_new"}, method = {RequestMethod.GET, RequestMethod.POST})
      */
+    @ApiOperation("添加相册")
+    @ApiOperationSupport(order = 1)
     @PostMapping(value = {"/add-new", "/addNew", "/add_new"})
     public JsonResult<Void> addNew(AlbumAddNewDTO albumAddNewDTO) {
 //        try {
@@ -49,10 +58,20 @@ public class AlbumController {
 //        }
     }
 
+    @ApiOperation("删除相册")
+    @ApiOperationSupport(order = 2)
     @GetMapping("/delById/{id:[0-9]+}")
     public JsonResult<Void> deleteById(@PathVariable Long id) {
         log.debug("开始处理相册deleteById: {}", id);
         albumService.deleteById(id);
         return JsonResult.ok();
     }
+
+    @GetMapping("/select")
+    public JsonResult<List<AlbumListItemVO>> select() {
+        String message = "开始查询相册列表";
+        log.debug(message);
+        return JsonResult.ok(albumService.list(), message);
+    }
+
 }

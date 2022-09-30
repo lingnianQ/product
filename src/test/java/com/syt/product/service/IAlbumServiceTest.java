@@ -33,4 +33,9 @@ class IAlbumServiceTest {
         Long id = 2L;
         albumService.deleteById(id);
     }
+
+    @Test
+    void testList() {
+        albumService.list().forEach(System.out::println);
+    }
 }

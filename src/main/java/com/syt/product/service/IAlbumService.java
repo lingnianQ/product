@@ -1,6 +1,9 @@
 package com.syt.product.service;
 
 import com.syt.product.pojo.dto.AlbumAddNewDTO;
+import com.syt.product.pojo.vo.AlbumListItemVO;
+
+import java.util.List;
 
 /**
  * 相册业务逻辑接口
@@ -22,4 +25,11 @@ public interface IAlbumService {
      * @param id 相册id
      */
     void deleteById(Long id);
+
+    /**
+     * 查询相册列表
+     *
+     * @return List<AlbumListItemVO>
+     */
+    List<AlbumListItemVO> list();
 }

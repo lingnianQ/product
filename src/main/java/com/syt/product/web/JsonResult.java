@@ -43,8 +43,16 @@ public class JsonResult<T> implements Serializable {
         return ok(null);
     }
 
+    public static JsonResult<Void> ok(String message) {
+        return ok(null, message);
+    }
+
     public static <T> JsonResult<T> ok(T data) {
         return new JsonResult<>(ServiceCode.OK.getValue(), null, data);
+    }
+
+    public static <T> JsonResult<T> ok(T data, String message) {
+        return new JsonResult<>(ServiceCode.OK.getValue(), message, data);
     }
 
     public static JsonResult<Void> fail(ServiceException e) {

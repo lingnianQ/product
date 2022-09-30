@@ -2,6 +2,7 @@ package com.syt.product.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 /**
  * 业务状态码的枚举
@@ -39,15 +40,13 @@ public enum ServiceCode {
     ERR_JWT_EXPIRED(60000),
     ERR_JWT_PARSE(60100);
 
-    private int value;
+    @Getter
+    private final int value;
 
     ServiceCode(int value) {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
 
     @Override
     public String toString() {
