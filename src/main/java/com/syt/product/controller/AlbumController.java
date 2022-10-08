@@ -48,7 +48,7 @@ public class AlbumController {
     @ApiOperation("添加相册")
     @ApiOperationSupport(order = 1)
     @PostMapping(value = {"/add-new", "/addNew", "/add_new"})
-    public JsonResult<Void> addNew(AlbumAddNewDTO albumAddNewDTO) {
+    public JsonResult<Void> addNew(@RequestBody AlbumAddNewDTO albumAddNewDTO) {
 //        try {
         log.debug("开始处理添加相册的请求: {}", albumAddNewDTO);
         albumService.addNew(albumAddNewDTO);
