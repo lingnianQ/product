@@ -1,10 +1,14 @@
 package com.syt.product.service;
 
 import com.syt.product.pojo.dto.AlbumAddNewDTO;
+import com.syt.product.pojo.vo.AlbumListItemVO;
+import com.syt.product.web.JsonResult;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,6 +40,9 @@ class IAlbumServiceTest {
 
     @Test
     void testList() {
-        albumService.list().forEach(System.out::println);
+        List<AlbumListItemVO> list = albumService.list();
+        JsonResult<List<AlbumListItemVO>> listJsonResult = JsonResult.ok(list);
+        System.out.println("listJsonResult = " + listJsonResult);
+        listJsonResult.getData().forEach(System.out::println);
     }
 }

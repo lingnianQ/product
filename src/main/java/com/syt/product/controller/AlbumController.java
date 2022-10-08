@@ -67,7 +67,7 @@ public class AlbumController {
         return JsonResult.ok();
     }
 
-    @GetMapping("/select")
+    @PostMapping("")
     public JsonResult<List<AlbumListItemVO>> select() {
         String message = "开始查询相册列表";
         log.debug(message);

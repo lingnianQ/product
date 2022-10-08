@@ -80,7 +80,7 @@
         select
         <include refid="ListQueryFields"/>
         from pms_album
-        order by id desc
+        order by id
     </select>
 
     <!-- <if test="true"> 不报错-->

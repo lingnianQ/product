@@ -3,6 +3,7 @@ package com.syt.product.web;
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.syt.product.ex.ServiceException;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,16 +24,19 @@ public class JsonResult<T> implements Serializable {
     /**
      * 响应状态
      */
+    @ApiModelProperty("业务状态码")
     private Integer state;
 
     /**
      * 响应信息
      */
+    @ApiModelProperty("业务状态信息")
     private String message;
 
     /**
      * 成功时响应的数据
      */
+    @ApiModelProperty("业务响应数据")
     private T data;
 
     /**
