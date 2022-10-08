@@ -2,6 +2,9 @@ package com.syt.product.service;
 
 
 import com.syt.product.pojo.dto.BrandAddNewDTO;
+import com.syt.product.pojo.vo.BrandListItemVO;
+
+import java.util.List;
 
 /**
  * 品牌接口
@@ -23,4 +26,12 @@ public interface IBrandService {
      * @param id 品牌id
      */
     void deleteById(Long id);
+
+
+    /**
+     * 查询品牌列表
+     *
+     * @return List<BrandListItemVO>
+     */
+    List<BrandListItemVO> list();
 }

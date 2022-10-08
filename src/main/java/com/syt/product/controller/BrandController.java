@@ -3,6 +3,7 @@ package com.syt.product.controller;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.syt.product.pojo.dto.BrandAddNewDTO;
+import com.syt.product.pojo.vo.BrandListItemVO;
 import com.syt.product.service.IBrandService;
 import com.syt.product.web.JsonResult;
 import io.swagger.annotations.Api;
@@ -10,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 品牌控制层
@@ -33,7 +36,7 @@ public class BrandController {
     @ApiOperation("添加品牌")
     @ApiOperationSupport(order = 1)
     @PostMapping("/add-new")
-    public JsonResult<Void> addNew(BrandAddNewDTO brandAddNewDTO) {
+    public JsonResult<Void> addNew(@RequestBody BrandAddNewDTO brandAddNewDTO) {
         log.debug("开始处理品牌的添加: {}", brandAddNewDTO);
         brandService.addNew(brandAddNewDTO);
         return JsonResult.ok();
@@ -46,5 +49,12 @@ public class BrandController {
         log.debug("开始处理品牌deleteById: {}", id);
         brandService.deleteById(id);
         return JsonResult.ok();
+    }
+
+    @PostMapping("")
+    public JsonResult<List<BrandListItemVO>> select() {
+        String message = "开始查询品牌列表";
+        log.debug(message);
+        return JsonResult.ok(brandService.list(), message);
     }
 }

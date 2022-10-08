@@ -4,12 +4,15 @@ import com.syt.product.ex.ServiceException;
 import com.syt.product.mapper.BrandMapper;
 import com.syt.product.pojo.dto.BrandAddNewDTO;
 import com.syt.product.pojo.entity.Brand;
+import com.syt.product.pojo.vo.BrandListItemVO;
 import com.syt.product.service.IBrandService;
 import com.syt.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 品牌业务处理层
@@ -49,5 +52,10 @@ public class BrandServiceImpl implements IBrandService {
         }
         brandMapper.deleteById(id);
         log.debug("删除品牌成功");
+    }
+
+    @Override
+    public List<BrandListItemVO> list() {
+        return brandMapper.list();
     }
 }
