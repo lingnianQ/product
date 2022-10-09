@@ -11,4 +11,4 @@ spring:
 # 日志的显示级别
 logging:
   level:
-    com.syt.product: info
+    com.syt.product: debug

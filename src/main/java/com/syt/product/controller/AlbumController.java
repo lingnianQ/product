@@ -6,9 +6,12 @@ import com.syt.product.pojo.vo.AlbumListItemVO;
 import com.syt.product.service.IAlbumService;
 import com.syt.product.web.JsonResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +24,7 @@ import java.util.List;
  */
 @Api(tags = "01. 相册管理")
 @Slf4j
+@Validated
 @RestController
 @RequestMapping("/albums")
 public class AlbumController {
@@ -48,7 +52,7 @@ public class AlbumController {
     @ApiOperation("添加相册")
     @ApiOperationSupport(order = 1)
     @PostMapping(value = {"/add-new", "/addNew", "/add_new"})
-    public JsonResult<Void> addNew(@RequestBody AlbumAddNewDTO albumAddNewDTO) {
+    public JsonResult<Void> addNew(@Validated AlbumAddNewDTO albumAddNewDTO) {
 //        try {
         log.debug("开始处理添加相册的请求: {}", albumAddNewDTO);
         albumService.addNew(albumAddNewDTO);
@@ -72,6 +76,33 @@ public class AlbumController {
         String message = "开始查询相册列表";
         log.debug(message);
         return JsonResult.ok(albumService.list(), message);
+    }
+
+    /**
+     * 还需要在控制器类上添加`@Validated`注解，
+     * 以下方法参数前的检查注解才会生效！
+     * Spring Validation框架将抛出`ConstraintViolationException`类型的异常
+     *
+     * <p>
+     * 处理请求的方法上有多个未封装的参数
+     * * @ApiImplicitParams({
+     * *     @ApiImplicitParam(xxx),
+     * *     @ApiImplicitParam(xxx),
+     * *     @ApiImplicitParam(xxx)
+     * * })
+     * </p>
+     *
+     * @param id
+     * @return
+     */
+    @Deprecated
+    @ApiOperation("删除相册【测试2】")
+    @ApiOperationSupport(order = 910)
+    @ApiImplicitParam(name = "id", value = "相册id", paramType = "query")
+    @PostMapping("/delete/test2")
+    public String deleteTest(@Range(min = 1, message = "测试删除相册失败，id值必须是1或更大的有效整数！") Long id) {
+        log.debug("【测试】开始处理【删除相册】的请求，这只是一个测试，没有实质功能！");
+        return "OK";
     }
 
 }
