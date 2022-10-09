@@ -51,8 +51,10 @@ public class BrandController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("品牌列表")
+    @ApiOperationSupport(order = 3)
     @PostMapping("")
-    public JsonResult<List<BrandListItemVO>> select() {
+    public JsonResult<List<BrandListItemVO>> list() {
         String message = "开始查询品牌列表";
         log.debug(message);
         return JsonResult.ok(brandService.list(), message);

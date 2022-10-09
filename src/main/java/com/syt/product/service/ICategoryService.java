@@ -1,6 +1,9 @@
 package com.syt.product.service;
 
 import com.syt.product.pojo.dto.CategoryAddNewDTO;
+import com.syt.product.pojo.vo.CategoryListItemVO;
+
+import java.util.List;
 
 /**
  * 类别接口
@@ -22,4 +25,11 @@ public interface ICategoryService {
      * @param id 类别id
      */
     void deleteById(Long id);
+
+    /**
+     * 类别列表
+     *
+     * @return list
+     */
+    List<CategoryListItemVO> list();
 }

@@ -4,12 +4,15 @@ import com.syt.product.ex.ServiceException;
 import com.syt.product.mapper.AttributeTemplateMapper;
 import com.syt.product.pojo.dto.AttributeTemplateAddNewDTO;
 import com.syt.product.pojo.entity.AttributeTemplate;
+import com.syt.product.pojo.vo.AttributeTemplateListItemVO;
 import com.syt.product.service.IAttributeTemplateService;
 import com.syt.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 属性模板业务处理层
@@ -46,5 +49,10 @@ public class AttributeTemplateServiceImpl implements IAttributeTemplateService {
         log.debug("开始删除属性模板");
         attributeTemplateMapper.deleteById(id);
         log.debug("属性模板删除成功");
+    }
+
+    @Override
+    public List<AttributeTemplateListItemVO> list() {
+        return attributeTemplateMapper.list();
     }
 }

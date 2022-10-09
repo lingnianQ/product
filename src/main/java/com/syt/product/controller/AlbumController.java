@@ -71,8 +71,10 @@ public class AlbumController {
         return JsonResult.ok();
     }
 
+    @ApiOperation("相册列表")
+    @ApiOperationSupport(order = 3)
     @PostMapping("")
-    public JsonResult<List<AlbumListItemVO>> select() {
+    public JsonResult<List<AlbumListItemVO>> list() {
         String message = "开始查询相册列表";
         log.debug(message);
         return JsonResult.ok(albumService.list(), message);

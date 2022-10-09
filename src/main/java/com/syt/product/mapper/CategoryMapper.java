@@ -93,4 +93,10 @@ public interface CategoryMapper {
      */
     List<CategoryListItemVO> listByParentId(Long parentId);
 
+    /**
+     * 类别列表
+     *
+     * @return list
+     */
+    List<CategoryListItemVO> list();
 }

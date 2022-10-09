@@ -1,9 +1,8 @@
 package com.syt.product.controller;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.syt.product.pojo.dto.BrandAddNewDTO;
 import com.syt.product.pojo.dto.CategoryAddNewDTO;
-import com.syt.product.service.IBrandService;
+import com.syt.product.pojo.vo.CategoryListItemVO;
 import com.syt.product.service.ICategoryService;
 import com.syt.product.web.JsonResult;
 import io.swagger.annotations.Api;
@@ -12,13 +11,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 类别控制层
  *
  * @author sytsnb@gmail.com
  * @date 2022 2022/9/27 20:34
  */
-@Api(tags = "03. 分类管理")
+@Api(tags = "04. 分类管理")
 @Slf4j
 @RestController
 @RequestMapping("/category")
@@ -47,5 +48,15 @@ public class CategoryController {
         log.debug("开始处理类别deleteById: {}", id);
         categoryService.deleteById(id);
         return JsonResult.ok();
+    }
+    @ApiOperation("类别列表")
+    @ApiOperationSupport(order = 3)
+    @PostMapping("")
+    public JsonResult<List<CategoryListItemVO>> list() {
+
+        String message = "类别列表查询成功";
+        log.debug(message);
+
+        return JsonResult.ok(categoryService.list(), message);
     }
 }

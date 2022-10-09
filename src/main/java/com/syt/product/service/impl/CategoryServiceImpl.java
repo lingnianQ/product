@@ -6,12 +6,15 @@ import com.syt.product.pojo.dto.BrandAddNewDTO;
 import com.syt.product.pojo.dto.CategoryAddNewDTO;
 import com.syt.product.pojo.entity.Brand;
 import com.syt.product.pojo.entity.Category;
+import com.syt.product.pojo.vo.CategoryListItemVO;
 import com.syt.product.service.ICategoryService;
 import com.syt.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author sytsnb@gmail.com
@@ -49,5 +52,10 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         categoryMapper.deleteById(id);
         log.debug("删除类别成功");
+    }
+
+    @Override
+    public List<CategoryListItemVO> list() {
+        return categoryMapper.list();
     }
 }
