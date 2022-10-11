@@ -11,6 +11,7 @@ import com.syt.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
+//@Scope("prototype")
 public class AlbumServiceImpl implements IAlbumService {
 
     public AlbumServiceImpl() {
