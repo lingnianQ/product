@@ -1,7 +1,7 @@
 # 激活Profile配置
 spring:
   profiles:
-    active: ${active:pro}
+    active: pro
   # Jackson框架相关配置
   jackson:
     default-property-inclusion: non_null

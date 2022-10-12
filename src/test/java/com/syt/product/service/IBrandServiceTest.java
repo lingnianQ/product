@@ -1,6 +1,7 @@
 package com.syt.product.service;
 
 import com.syt.product.pojo.dto.BrandAddNewDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author sytsnb@gmail.com
  * @date 2022 2022/9/27 20:21
  */
-
+@Slf4j
 @SpringBootTest
-@Transactional
+//@Transactional
 class IBrandServiceTest {
 
     @Autowired
@@ -41,5 +42,23 @@ class IBrandServiceTest {
     void testDeleteById() {
         Long id = 25L;
         brandService.deleteById(id);
+    }
+
+    @Test
+    void testSetEnable() {
+        try {
+            brandService.setEnable(5L);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    @Test
+    void testSetDisable() {
+        try {
+            brandService.setDisable(8L);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
     }
 }

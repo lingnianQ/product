@@ -27,6 +27,20 @@ public interface IBrandService {
      */
     void deleteById(Long id);
 
+    /**
+     * 启用品牌
+     *
+     * @param id 品牌的id
+     */
+    void setEnable(Long id);
+
+    /**
+     * 禁用品牌
+     *
+     * @param id 品牌的id
+     */
+    void setDisable(Long id);
+
 
     /**
      * 查询品牌列表

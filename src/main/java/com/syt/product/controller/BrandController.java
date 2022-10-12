@@ -51,8 +51,30 @@ public class BrandController {
         return JsonResult.ok();
     }
 
-    @ApiOperation("品牌列表")
+    @ApiOperation("启用品牌")
     @ApiOperationSupport(order = 3)
+    @GetMapping("/enable/{id:[0-9]+}")
+    public JsonResult<Void> setEnable(@PathVariable Long id) {
+        log.debug("开始处理品牌setEnable: {}", id);
+        brandService.setEnable(id);
+        String message = "启用品牌成功";
+        log.debug(message);
+        return JsonResult.ok(message);
+    }
+
+    @ApiOperation("禁用品牌")
+    @ApiOperationSupport(order = 4)
+    @GetMapping("/disable/{id:[0-9]+}")
+    public JsonResult<Void> setDisEnable(@PathVariable Long id) {
+        log.debug("开始处理品牌disEnable: {}", id);
+        brandService.setDisable(id);
+        String message = "禁用品牌成功";
+        log.debug(message);
+        return JsonResult.ok(message);
+    }
+
+    @ApiOperation("品牌列表")
+    @ApiOperationSupport(order = 5)
     @PostMapping("")
     public JsonResult<List<BrandListItemVO>> list() {
         String message = "开始查询品牌列表";
