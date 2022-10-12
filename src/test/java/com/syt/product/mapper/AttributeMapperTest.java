@@ -73,9 +73,10 @@ class AttributeMapperTest {
     }
 
     @Test
-    void testCountByName() {
-        int countByName = attributeMapper.countByName("颜色1");
-        System.out.println("countByName = " + countByName);
+    void testCountByNameAndTemplateI() {
+        int countByNameAndTemplateId = attributeMapper.countByNameAndTemplateId("颜色1", 3L);
+        System.out.println("countByNameAndTemplateId = " + countByNameAndTemplateId);
+
     }
 
     @Test

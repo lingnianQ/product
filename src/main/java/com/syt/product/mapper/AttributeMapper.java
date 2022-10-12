@@ -3,6 +3,7 @@ package com.syt.product.mapper;
 import com.syt.product.pojo.entity.Attribute;
 import com.syt.product.pojo.vo.AttributeListItemVO;
 import com.syt.product.pojo.vo.AttributeStandardVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -63,10 +64,11 @@ public interface AttributeMapper {
     /**
      * 通过属性名统计数量
      *
-     * @param name 属性名
+     * @param name       属性名
+     * @param templateId 属性模板id
      * @return 数量
      */
-    int countByName(String name);
+    int countByNameAndTemplateId(@Param("name") String name, @Param("templateId") Long templateId);
 
     /**
      * 通过id查找 属性实体
