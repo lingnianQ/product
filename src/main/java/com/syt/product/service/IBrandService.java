@@ -3,6 +3,7 @@ package com.syt.product.service;
 
 import com.syt.product.pojo.dto.BrandAddNewDTO;
 import com.syt.product.pojo.vo.BrandListItemVO;
+import com.syt.product.pojo.vo.BrandStandardVO;
 
 import java.util.List;
 
@@ -41,6 +42,13 @@ public interface IBrandService {
      */
     void setDisable(Long id);
 
+    /**
+     * 通过id查询标准视图
+     *
+     * @param id
+     * @return
+     */
+    BrandStandardVO getStandardById(Long id);
 
     /**
      * 查询品牌列表

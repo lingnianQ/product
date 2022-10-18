@@ -4,6 +4,7 @@ package com.syt.product.controller;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.syt.product.pojo.dto.BrandAddNewDTO;
 import com.syt.product.pojo.vo.BrandListItemVO;
+import com.syt.product.pojo.vo.BrandStandardVO;
 import com.syt.product.service.IBrandService;
 import com.syt.product.web.JsonResult;
 import io.swagger.annotations.Api;
@@ -73,8 +74,17 @@ public class BrandController {
         return JsonResult.ok(message);
     }
 
+    @ApiOperation("查找品牌")
+    @ApiOperationSupport(order = 400)
+    @GetMapping("/{id:[0-9]+}")
+    public JsonResult<BrandStandardVO> getStandardById(@PathVariable Long id) {
+        log.debug("开始查询品牌getStandardById: {}", id);
+        BrandStandardVO standardById = brandService.getStandardById(id);
+        return JsonResult.ok(standardById, "查询成功");
+    }
+
     @ApiOperation("品牌列表")
-    @ApiOperationSupport(order = 5)
+    @ApiOperationSupport(order = 500)
     @PostMapping("")
     public JsonResult<List<BrandListItemVO>> list() {
         String message = "开始查询品牌列表";

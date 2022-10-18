@@ -68,6 +68,18 @@ public class BrandServiceImpl implements IBrandService {
     }
 
     @Override
+    public BrandStandardVO getStandardById(Long id) {
+        log.debug("开始查询品牌....");
+        BrandStandardVO brand = brandMapper.getStandardById(id);
+        if (brand == null) {
+            String message = "查询失败所查询的品牌不存在";
+            log.warn(message);
+            throw new ServiceException(ServiceCode.ERR_NOT_FOUND, message);
+        }
+        return brand;
+    }
+
+    @Override
     public List<BrandListItemVO> list() {
         return brandMapper.list();
     }
