@@ -14,15 +14,17 @@ import java.util.List;
  */
 public interface IBrandRedisRepository {
 
+
+    String BRAND_KEY_PREFIX = "brand:";
     /**
      * 品牌数据项在redis中的key前缀
      */
-    String BRAND_ITEM_KEY_PREFIX = "brand:item:";
+    String BRAND_ITEM_KEY_PREFIX = BRAND_KEY_PREFIX + "item:";
 
     /**
      * 品牌列表在Redis中的Key
      */
-    String BRAND_LIST_KEY = "brand:list";
+    String BRAND_LIST_KEY = BRAND_KEY_PREFIX + "list";
 
     /**
      * 保存品牌到redis
@@ -37,6 +39,11 @@ public interface IBrandRedisRepository {
      * @param brands 品牌列表
      */
     void save(List<BrandListItemVO> brands);
+
+    /**
+     * 删除已有列表
+     */
+    void deleteAll();
 
     /**
      * 从Redis中读取数据

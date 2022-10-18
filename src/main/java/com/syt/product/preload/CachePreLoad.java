@@ -36,6 +36,9 @@ public class CachePreLoad implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         log.debug("开始处理缓存预热");
 
+        log.debug("删除Redis中原有的品牌数据");
+        brandRedisRepository.deleteAll();
+
         log.debug("从MuSQL中读取品牌列表");
         List<BrandListItemVO> brands = brandMapper.list();
 

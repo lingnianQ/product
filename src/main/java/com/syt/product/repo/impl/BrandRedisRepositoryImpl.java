@@ -7,11 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 处理品牌缓存的实现类
@@ -45,6 +47,12 @@ public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
         for (BrandListItemVO brand : brands) {
             ops.rightPush(key, brand);
         }
+    }
+
+    @Override
+    public void deleteAll() {
+        Long count = redisTemplate.delete(getAllKey());
+        log.debug("删除原有BrandList: {}", count);
     }
 
 
@@ -85,5 +93,9 @@ public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
 
     private String getListKey() {
         return BRAND_LIST_KEY;
+    }
+
+    private Set<String> getAllKey() {
+        return redisTemplate.keys(BRAND_KEY_PREFIX + "*");
     }
 }
