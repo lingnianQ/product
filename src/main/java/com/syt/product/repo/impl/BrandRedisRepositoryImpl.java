@@ -36,7 +36,7 @@ public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
     @Override
     public void save(BrandStandardVO brandStandardVO) {
         log.debug("准备向Redis中写入数据: {}", brandStandardVO);
-        String key = getKey(brandStandardVO.getId());
+        String key = getItemKey(brandStandardVO.getId());
         redisTemplate.opsForSet().add(getAllKeysKey(), key);
         redisTemplate.opsForValue().set(key, brandStandardVO);
     }
@@ -53,14 +53,14 @@ public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
 
     @Override
     public Long deleteAll() {
-        Set<String> allKey = getAllKey();
-        return redisTemplate.delete(allKey);
+        Set<String> allKeys = getAllKeys();
+        return redisTemplate.delete(allKeys);
     }
 
 
     @Override
     public BrandStandardVO get(Long id) {
-        Serializable serializable = redisTemplate.opsForValue().get(getKey(id));
+        Serializable serializable = redisTemplate.opsForValue().get(getItemKey(id));
         if (serializable != null) {
             if (serializable instanceof BrandStandardVO) {
                 return (BrandStandardVO) serializable;
@@ -89,16 +89,12 @@ public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
         return brands;
     }
 
-    private String getKey(Long id) {
+    private String getItemKey(Long id) {
         return BRAND_ITEM_KEY_PREFIX + id;
     }
 
     private String getListKey() {
         return BRAND_LIST_KEY;
-    }
-
-    private Set<String> getAllKey() {
-        return redisTemplate.keys(BRAND_KEY_PREFIX + "*");
     }
 
     private String getAllKeysKey() {
@@ -107,7 +103,7 @@ public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
 
     private Set<String> getAllKeys() {
         Set<Serializable> members = redisTemplate.opsForSet().members(getAllKeysKey());
-        HashSet<String> keys = new HashSet<>();
+        Set<String> keys = new HashSet<>();
         for (Serializable member : members) {
             keys.add((String) member);
         }
