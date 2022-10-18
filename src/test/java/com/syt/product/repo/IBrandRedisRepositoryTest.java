@@ -6,30 +6,37 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author sytsnb@gmail.com
  * @date 2022 2022/10/18 12:03
  */
 @Slf4j
 @SpringBootTest
-class IRedisRepositoryTest {
+class IBrandRedisRepositoryTest {
 
     @Autowired
-    private IRedisRepository redisRepository;
+    private IBrandRedisRepository brandRedisRepository;
 
     @Test
     void testSave() {
         BrandStandardVO brandStandardVO = new BrandStandardVO();
         brandStandardVO.setId(657L);
         brandStandardVO.setName("testBrand");
-        redisRepository.save(brandStandardVO);
+        brandRedisRepository.save(brandStandardVO);
+    }
+
+    @Test
+    void testSave1() {
     }
 
     @Test
     void testGet() {
-        BrandStandardVO brandStandardVO = redisRepository.get(657L);
+        BrandStandardVO brandStandardVO = brandRedisRepository.get(657L);
         log.debug("brandStandardVO = {}", brandStandardVO);
+    }
+
+
+    @Test
+    void testList() {
     }
 }

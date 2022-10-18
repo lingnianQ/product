@@ -1,7 +1,8 @@
 package com.syt.product.repo.impl;
 
+import com.syt.product.pojo.vo.BrandListItemVO;
 import com.syt.product.pojo.vo.BrandStandardVO;
-import com.syt.product.repo.IRedisRepository;
+import com.syt.product.repo.IBrandRedisRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
@@ -9,6 +10,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 处理品牌缓存的实现类
@@ -19,13 +22,13 @@ import java.io.Serializable;
  */
 @Slf4j
 @Repository
-public class RedisRepositoryImpl implements IRedisRepository {
+public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
 
     @Autowired
     private RedisTemplate<String, Serializable> redisTemplate;
 
-    public RedisRepositoryImpl() {
-        log.debug("...RedisRepositoryImpl.....");
+    public BrandRedisRepositoryImpl() {
+        log.debug("...BrandRedisRepositoryImpl.....");
     }
 
     @Override
@@ -34,6 +37,16 @@ public class RedisRepositoryImpl implements IRedisRepository {
         String key = getKey(brandStandardVO.getId());
         redisTemplate.opsForValue().set(key, brandStandardVO);
     }
+
+    @Override
+    public void save(List<BrandListItemVO> brands) {
+        String key = getListKey();
+        ListOperations<String, Serializable> ops = redisTemplate.opsForList();
+        for (BrandListItemVO brand : brands) {
+            ops.rightPush(key, brand);
+        }
+    }
+
 
     @Override
     public BrandStandardVO get(Long id) {
@@ -46,7 +59,31 @@ public class RedisRepositoryImpl implements IRedisRepository {
         return null;
     }
 
+    @Override
+    public List<BrandListItemVO> list() {
+        long start = 0;
+        long end = -1;
+        return list(start, end);
+    }
+
+    @Override
+    public List<BrandListItemVO> list(long start, long end) {
+        String key = getListKey();
+        ListOperations<String, Serializable> ops = redisTemplate.opsForList();
+        List<Serializable> list = ops.range(key, start, end);
+
+        List<BrandListItemVO> brands = new ArrayList<>();
+        for (Serializable item : list) {
+            brands.add((BrandListItemVO) item);
+        }
+        return brands;
+    }
+
     private String getKey(Long id) {
         return BRAND_ITEM_KEY_PREFIX + id;
+    }
+
+    private String getListKey() {
+        return BRAND_LIST_KEY;
     }
 }
