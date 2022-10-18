@@ -6,6 +6,7 @@ import com.syt.product.pojo.dto.BrandAddNewDTO;
 import com.syt.product.pojo.entity.Brand;
 import com.syt.product.pojo.vo.BrandListItemVO;
 import com.syt.product.pojo.vo.BrandStandardVO;
+import com.syt.product.repo.IBrandRedisRepository;
 import com.syt.product.service.IBrandService;
 import com.syt.product.web.ServiceCode;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,9 @@ public class BrandServiceImpl implements IBrandService {
 
     @Autowired
     private BrandMapper brandMapper;
+
+    @Autowired
+    private IBrandRedisRepository brandRedisRepository;
 
     @Override
     public void addNew(BrandAddNewDTO brandAddNewDTO) {
@@ -70,7 +74,8 @@ public class BrandServiceImpl implements IBrandService {
     @Override
     public BrandStandardVO getStandardById(Long id) {
         log.debug("开始查询品牌....");
-        BrandStandardVO brand = brandMapper.getStandardById(id);
+        //BrandStandardVO brand = brandMapper.getStandardById(id);
+        BrandStandardVO brand = brandRedisRepository.get(id);
         if (brand == null) {
             String message = "查询失败所查询的品牌不存在";
             log.warn(message);
@@ -81,7 +86,8 @@ public class BrandServiceImpl implements IBrandService {
 
     @Override
     public List<BrandListItemVO> list() {
-        return brandMapper.list();
+        return brandRedisRepository.list();
+//        return brandMapper.list();
     }
 
     private void updateById(Long id, Integer enable) {
