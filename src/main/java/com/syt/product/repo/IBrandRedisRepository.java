@@ -27,6 +27,11 @@ public interface IBrandRedisRepository {
     String BRAND_LIST_KEY = BRAND_KEY_PREFIX + "list";
 
     /**
+     * 所有品牌数据的Key
+     */
+    String BRAND_ALL_KEYS_KEY = "brand:all-keys";
+
+    /**
      * 保存品牌到redis
      *
      * @param brandStandardVO
@@ -42,8 +47,9 @@ public interface IBrandRedisRepository {
 
     /**
      * 删除已有列表
+     * @return long
      */
-    void deleteAll();
+    Long deleteAll();
 
     /**
      * 从Redis中读取数据

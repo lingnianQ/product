@@ -7,11 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -37,6 +37,7 @@ public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
     public void save(BrandStandardVO brandStandardVO) {
         log.debug("准备向Redis中写入数据: {}", brandStandardVO);
         String key = getKey(brandStandardVO.getId());
+        redisTemplate.opsForSet().add(getAllKeysKey(), key);
         redisTemplate.opsForValue().set(key, brandStandardVO);
     }
 
@@ -44,15 +45,16 @@ public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
     public void save(List<BrandListItemVO> brands) {
         String key = getListKey();
         ListOperations<String, Serializable> ops = redisTemplate.opsForList();
+        redisTemplate.opsForSet().add(getAllKeysKey(), key);
         for (BrandListItemVO brand : brands) {
             ops.rightPush(key, brand);
         }
     }
 
     @Override
-    public void deleteAll() {
-        Long count = redisTemplate.delete(getAllKey());
-        log.debug("删除原有BrandList: {}", count);
+    public Long deleteAll() {
+        Set<String> allKey = getAllKey();
+        return redisTemplate.delete(allKey);
     }
 
 
@@ -97,5 +99,18 @@ public class BrandRedisRepositoryImpl implements IBrandRedisRepository {
 
     private Set<String> getAllKey() {
         return redisTemplate.keys(BRAND_KEY_PREFIX + "*");
+    }
+
+    private String getAllKeysKey() {
+        return BRAND_ALL_KEYS_KEY;
+    }
+
+    private Set<String> getAllKeys() {
+        Set<Serializable> members = redisTemplate.opsForSet().members(getAllKeysKey());
+        HashSet<String> keys = new HashSet<>();
+        for (Serializable member : members) {
+            keys.add((String) member);
+        }
+        return keys;
     }
 }
