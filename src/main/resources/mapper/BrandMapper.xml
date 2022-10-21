@@ -4,6 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.syt.product.mapper.BrandMapper">
     <!--    mybatis开启二级缓存,默认LRU算法,速度快50%-->
+    <!-- namespace="com.syt.product.mapper.BrandMapper"
+      但是必须保证所有的增删改查都在一个命名空间内
+      比如AMapper.xml与BMapper.xml 对一张user表进行操作
+      B修改了user表，A是感知不到的
+      如果此时A里查询用到了缓存，查到的就是旧的数据-->
     <cache/>
     <!--插入-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
