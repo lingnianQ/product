@@ -34,7 +34,7 @@ public class CacheSchedule {
      * // >> 以上各值都可以使用通配符，使用星号（*）则表示任意值，使用问号（?）表示不关心具体值，并且，问号只能用于“周（星期）”和“日”这2个位置
      * // >> 以上各值，可以使用“x/x”格式的值，例如，分钟对应的值使用“1/5”，则表示当分钟值为1的那一刻开始执行，往后每间隔5分钟执行一次
      */
-    @Scheduled(fixedRate = 5 * 60 * 1000)
+    @Scheduled(fixedRate = 2 * 60 * 1000)
     public void rebuildCache() {
         log.debug("开始执行处理缓存的计划任务……");
         brandService.rebuildCache();
