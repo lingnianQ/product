@@ -74,7 +74,7 @@ public class BrandServiceImpl implements IBrandService {
     @Override
     public BrandStandardVO getStandardById(Long id) {
         log.debug("开始查询品牌....");
-        //BrandStandardVO brand = brandMapper.getStandardById(id);
+        //BrandStandardVO brand = brandMapper.getStandardById(id)
         BrandStandardVO brand = brandRedisRepository.get(id);
         if (brand == null) {
             String message = "查询失败所查询的品牌不存在";
@@ -88,6 +88,24 @@ public class BrandServiceImpl implements IBrandService {
     public List<BrandListItemVO> list() {
         return brandRedisRepository.list();
 //        return brandMapper.list();
+    }
+
+    @Override
+    public void rebuildCache() {
+        log.debug("删除Redis中原有的品牌数据");
+        brandRedisRepository.deleteAll();
+
+        log.debug("从MySQL中读取品牌列表");
+        List<BrandListItemVO> brands = brandMapper.list();
+
+        log.debug("将品牌列表写入Redis");
+        brandRedisRepository.save(brands);
+
+        log.debug("逐一根据id从MySQL中读取品牌详情,并写入Redis");
+        for (BrandListItemVO item : brands) {
+            BrandStandardVO brand = brandMapper.getStandardById(item.getId());
+            brandRedisRepository.save(brand);
+        }
     }
 
     private void updateById(Long id, Integer enable) {

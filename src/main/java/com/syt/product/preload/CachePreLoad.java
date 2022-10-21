@@ -39,7 +39,7 @@ public class CachePreLoad implements ApplicationRunner {
         log.debug("删除Redis中原有的品牌数据");
         brandRedisRepository.deleteAll();
 
-        log.debug("从MuSQL中读取品牌列表");
+        log.debug("从MySQL中读取品牌列表");
         List<BrandListItemVO> brands = brandMapper.list();
 
         log.debug("将品牌列表写入Redis");

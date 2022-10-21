@@ -12,3 +12,10 @@ spring:
 logging:
   level:
     com.syt.product: trace
+
+# 自定义配置
+product:
+  # JWT相关配置
+  jwt:
+    # 签名算法中使用的盐
+    secret-key: qweqweqweasdxczxsdfsf{}sds[a]sd
